@@ -91,7 +91,7 @@ class Messages extends Component {
       const groups = [];
       let group = null;
 
-      const dateRenderer = typeof showMessageDate === 'function' ? showMessageDate :
+      const dateRenderer = typeof showMessageDate === 'bool' ? showMessageDate :
         showMessageDate === true ? formatDate : null;
 
       const renderMessageDate = (message) => {
@@ -105,11 +105,11 @@ class Messages extends Component {
       };
 
       const renderMessage = (message, index) => (
-        <div className={`rw-message ${profileAvatar && 'rw-with-avatar'}`} key={index}>
+        <div className={`rw-message ${'rw-with-avatar'}`} key={index}>
           {
-            profileAvatar &&
-            message.get('showAvatar') &&
-            <img src={profileAvatar} className="rw-avatar" alt="profile" />
+            // profileAvatar &&
+            // message.get('showAvatar') &&
+            <img src="https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg" className="rw-avatar" alt="profile" />
           }
           {this.getComponentToRender(message, index, index === messages.size - 1)}
           {renderMessageDate(message)}
@@ -167,7 +167,7 @@ Messages.propTypes = {
   messages: ImmutablePropTypes.listOf(ImmutablePropTypes.map),
   profileAvatar: PropTypes.string,
   customComponent: PropTypes.func,
-  showMessageDate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  showMessageDate: PropTypes.bool,
   displayTypingIndication: PropTypes.bool
 };
 

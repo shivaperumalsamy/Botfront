@@ -234,7 +234,7 @@ class Widget extends Component {
     this.clearCustomStyle();
     this.eventListenerCleaner();
     dispatch(clearMetadata());
-    if (botUtterance.metadata) this.propagateMetadata(botUtterance.metadata);
+    if (botUtterance && botUtterance.metadata) this.propagateMetadata(botUtterance.metadata);
     const newMessage = { ...botUtterance, text: String(botUtterance.text) };
     if (botUtterance.metadata && botUtterance.metadata.customCss) {
       newMessage.customCss = botUtterance.metadata.customCss;
@@ -649,7 +649,7 @@ Widget.propTypes = {
   inputTextFieldHint: PropTypes.string,
   customComponent: PropTypes.func,
   displayUnreadCount: PropTypes.bool,
-  showMessageDate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  showMessageDate: PropTypes.bool,
   customMessageDelay: PropTypes.func.isRequired,
   tooltipPayload: PropTypes.string,
   tooltipSent: PropTypes.shape({}),
@@ -669,7 +669,7 @@ Widget.defaultProps = {
   fullScreenMode: false,
   connectOn: 'mount',
   autoClearCache: false,
-  displayUnreadCount: false,
+  displayUnreadCount: true,
   tooltipPayload: null,
   inputTextFieldHint: 'Type a message...',
   oldUrl: '',

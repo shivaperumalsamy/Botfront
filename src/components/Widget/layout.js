@@ -92,7 +92,7 @@ WidgetLayout.propTypes = {
   closeImage: PropTypes.string,
   customComponent: PropTypes.func,
   displayUnreadCount: PropTypes.bool,
-  showMessageDate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  showMessageDate: PropTypes.bool,
   tooltipPayload: PropTypes.string
 };
 

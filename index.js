@@ -126,7 +126,7 @@ export const rasaWebchatProTypes = {
   docViewer: PropTypes.bool,
   customComponent: PropTypes.func,
   displayUnreadCount: PropTypes.bool,
-  showMessageDate: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  showMessageDate: PropTypes.bool,
   customMessageDelay: PropTypes.func,
   tooltipPayload: PropTypes.string,
   tooltipDelay: PropTypes.number,
@@ -184,11 +184,11 @@ export const rasaWebchatProDefaultTypes = {
   params: {
     storage: 'local'
   },
-  docViewer: false,
+  docViewer: true,
   showCloseButton: true,
   showFullScreenButton: false,
-  displayUnreadCount: false,
-  showMessageDate: false,
+  displayUnreadCount: true,
+  showMessageDate: true,
   customMessageDelay: (message) => {
     let delay = message.length * 30;
     if (delay > 3 * 1000) delay = 3 * 1000;
