@@ -1,15 +1,3 @@
-<p align="center">
-
-<a href="https://www.npmjs.com/package/botfront">
-    <img alt="npm" src="https://img.shields.io/npm/v/rasa-webchat.svg">
-</a>
-<a href='https://github.com/botfront/botfront/blob/master/LICENSE'>
-    <img alt="License" src="https://img.shields.io/github/license/botfront/rasa-webchat">
-</a>
-<a href='https://spectrum.chat/botfront'>
-    <img alt="Spectrum link" src="https://withspectrum.github.io/badge/badge.svg">
-</a>
-</p>
 <h1 align="center">Rasa Webchat 💬</h1>
 <h5 align="center">
  A chat widget to deploy virtual assistants made with <a href="https://github.com/rasaHQ/rasa">Rasa</a> or <a href="https://github.com/botfront/botfront?utm_source=rasa_webchat">Botfront</a> on any website.
@@ -37,8 +25,6 @@
 - Smart delay between messages
 - Easy to import in a script tag or as a React Component
 
-## 🔥 Promo: check out our other cool open source project
-
 <a href="https://github.com/botfront/botfront?utm_source=rasa_webchat">
 <img align="center" src="https://github.com/botfront/botfront/raw/master/botfront_animation.gif" alt="demonstration" width="100%">
 </a>
@@ -50,6 +36,7 @@
 
 In your `<body/>`:
 ```html
+WAY 1:
 <script>!(function () {
   let e = document.createElement("script"),
     t = document.head || document.getElementsByTagName("head")[0];
@@ -70,12 +57,36 @@ In your `<body/>`:
     t.insertBefore(e, t.firstChild);
 })();
 </script>
+
+WAY 2:
+<script>
+  !(function () {
+    let e = document.createElement("script"), t = document.head || document.getElementsByTagName("head")[0];
+      (e.src = "https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js"),
+      (e.async = !0),
+      (e.onload = () => {
+        window.WebChat.default(
+          {
+            selector: "#webchat",
+            initPayload: "/greet",
+            customData: {"language": "en"},
+            socketUrl: "http://localhost:5005/",
+            socketPath: "/socket.io/",
+            title: "State of Utah Court Bot",
+            subtitle: "Online",
+            params: {"storage": "session"},
+            displayUnreadCount: true,
+            showMessageDate: true,
+            profileAvatar: "https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg"
+          },
+          null
+        );
+      }),
+      t.insertBefore(e, t.firstChild);
+  })();
+</script>
+
 ```
-
-⚠️ We recommend adding a version tag to prevent breaking changes from major versions, e.g for version 1.0.0 https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.0/lib/index.js,
-however this will not work with versions below 1.0.0. If you do not specify a version, you will get served the latest available version of the rasa-webchat.
-
-About images: `width` and `height` define the size in pixels that images in messages are crop-scaled to. If not present, the image will scale to the maximum width of the container and the image.
 
 ### As a React component
 
@@ -150,20 +161,6 @@ onSocketEvent={{
   'connect': () => console.log('connection established'),
   'disconnect': () => doSomeCleanup(),
 }}
-```
-
-##### `params`
-
-The `params` props only allows to specify custom image dimensions:
-```jsx
-params={{
-        images: {
-          dims: {
-            width: 300,
-            height: 200
-          }
-        }
-      }}
 ```
 
 ### Other features
@@ -264,29 +261,6 @@ hierarchy:
 | .rw-videoFrame             | a container for sending video                                       |
 
 
-## Contributors
-[@PHLF](https://github.com/phlf)
-[@znat](https://github.com/znat)
-[@TheoTomalty](https://github.com/TheoTomalty)
-[@Hub4IT](https://github.com/Hub4IT)
-[@dliuproduction](https://github.com/dliuproduction)
-[@MatthieuJnon](https://github.com/MatthieuJnon)
-[@mofortin](https://github.com/mofortin)
-[@GuillaumeTech](https://github.com/GuillaumeTech)
-                                 
-<br/>
-<h2 align="center">License</h2>
-
-Copyright (C) 2021 Dialogue Technologies Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.(C) 2021 Dialogue Technologies Inc. All rights reserved.
+## Steps to run
+1) npm install
+2) DEV: npm run dev
