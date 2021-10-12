@@ -37,10 +37,11 @@ function initStore(
     }
     const emitMessage = (payload) => {
       const emit = () => {
+        const jwtToken = sessionStorage.getItem("JWT_TOKEN") || null;
         socket.emit(
           'user_uttered', {
             message: payload,
-            customData: socket.customData,
+            customData: {...socket.customData, jwtToken },
             session_id: sessionId
           }
         );

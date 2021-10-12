@@ -6,7 +6,7 @@
       const load = () => {
         if (!WebChat) setTimeout(load, 100);
         if (WebChat) WebChat.default({
-          customData:{language:"en"},
+          customData:{language:"en", "token": "testMyCaseToken"},
           socketUrl:"http://localhost:5005",
           withRules: true,
         });
