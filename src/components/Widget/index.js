@@ -407,7 +407,7 @@ class Widget extends Component {
                         : sessionObject;
 
                 // eslint-disable-next-line no-console
-                console.log(`session_confirm:${socket.socket.id} session_id:${remoteId}`);
+                // console.log(`session_confirm:${socket.socket.id} session_id:${remoteId}`);
                 // Store the initial state to both the redux store and the storage, set connected to true
                 dispatch(connectServer());
                 /*
@@ -489,7 +489,7 @@ class Widget extends Component {
             if (!sessionId) return;
 
             // eslint-disable-next-line no-console
-            console.log('sending init payload', sessionId);
+            // console.log('sending init payload', sessionId);
             socket.emit('user_uttered', {
                 message: initPayload,
                 customData,
