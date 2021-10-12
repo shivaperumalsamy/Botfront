@@ -117,7 +117,7 @@ class Messages extends Component {
                         // profileAvatar &&
                         // message.get('showAvatar') &&
                         <img
-                            src="https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg"
+                            src="https://www.pngkit.com/png/detail/988-9886241_hotel-computer-icons-linkedin-native-advertising-chatbot-gloucester.png"
                             className="rw-avatar"
                             alt="profile"
                         />

@@ -208,7 +208,7 @@ ConnectedWidget.propTypes = {
 
 ConnectedWidget.defaultProps = {
     title: 'State of Utah Chatbot',
-    subtitle: 'How can i help you',
+    subtitle: '',
     customData: {},
     inputTextFieldHint: 'Type a message...',
     connectingText: 'Waiting for server...',

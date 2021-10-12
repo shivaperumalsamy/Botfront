@@ -79,8 +79,7 @@ WAY 2:
                         params: { storage: 'session' },
                         displayUnreadCount: true,
                         showMessageDate: true,
-                        profileAvatar:
-                            'https://png.pngtree.com/png-vector/20190704/ourmid/pngtree-businessman-user-avatar-free-vector-png-image_1538405.jpg',
+                        profileAvatar: '',
                     },
                     null
                 );
