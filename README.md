@@ -1,11 +1,15 @@
-<h1 align="center">Rasa Webchat 💬</h1>
-<h5 align="center">
+<p align="left">
+<a href="https://www.npmjs.com/package/botfront">
+    <img alt="npm" src="https://img.shields.io/npm/v/rasa-webchat.svg">
+</a>
+</p>
+<h1 align="left">Rasa Webchat 💬</h1>
+<h5 align="left">
  A chat widget to deploy virtual assistants made with <a href="https://github.com/rasaHQ/rasa">Rasa</a> or <a href="https://github.com/botfront/botfront?utm_source=rasa_webchat">Botfront</a> on any website.
 </h5>
 <br />
-<br />
 
-<div align="center">
+<div align="left">
 <img align="center" src="./rasa_webchat.gif" alt="demonstration">
 </div>
 <br />
@@ -26,9 +30,15 @@
 -   Smart delay between messages
 -   Easy to import in a script tag or as a React Component
 
-<a href="https://github.com/botfront/botfront?utm_source=rasa_webchat">
-<img align="center" src="https://github.com/botfront/botfront/raw/master/botfront_animation.gif" alt="demonstration" width="100%">
-</a>
+<br />
+
+## Steps to run
+
+```html
+1. npm install
+2. DEV: npm run dev
+```
+<br />
 
 ## Usage
 
@@ -36,8 +46,8 @@
 
 In your `<body/>`:
 
+#### Method 1:
 ```html
-WAY 1:
 <script>
     !(function() {
         let e = document.createElement('script'),
@@ -48,7 +58,7 @@ WAY 1:
             (e.onload = () => {
                 window.WebChat.default(
                     {
-                        customData: { language: 'en' },
+                        customData: { language: 'en' }, // please refer customData below
                         socketUrl: 'https://bf-botfront.development.agents.botfront.cloud',
                         // add other props here
                     },
@@ -58,8 +68,9 @@ WAY 1:
             t.insertBefore(e, t.firstChild);
     })();
 </script>
-
-WAY 2:
+```
+#### Method 2:
+```html
 <script>
     !(function() {
         let e = document.createElement('script'),
@@ -71,7 +82,7 @@ WAY 2:
                     {
                         selector: '#webchat',
                         initPayload: '/greet',
-                        customData: { language: 'en' },
+                        customData: { language: 'en' }, // please refer customData below
                         socketUrl: 'http://localhost:5005/',
                         socketPath: '/socket.io/',
                         title: 'State of Utah Court Bot',
@@ -89,6 +100,44 @@ WAY 2:
 </script>
 ```
 
+#### customData Reference:
+```html
+<script>
+Option A:
+
+{
+	customData: {
+		language: "en",
+		auth: {
+			"transitionId": "",
+            "transitionKey": ""
+		},
+		senderDetails: {
+			"senderId": "",
+			"senderName": ""
+		},
+		accessToken: "",
+	}
+}
+
+Option B:
+
+{
+	customData: {
+		language: "en",
+		auth: {
+			"token": ""
+		},
+		senderDetails: {
+			"senderId": "",
+			"senderName": ""
+		},
+		accessToken: "",
+		refreshToken: ""
+	}
+}
+</script>
+```
 ### As a React component
 
 Install the [npm package](https://npmjs.com/rasa-webchat):
@@ -260,7 +309,3 @@ hierarchy:
 | .rw-imageFrame             | a container for sending images                                     |
 | .rw-videoFrame             | a container for sending video                                      |
 
-## Steps to run
-
-1. npm install
-2. DEV: npm run dev
