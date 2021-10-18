@@ -109,8 +109,8 @@ Option A:
 	customData: {
 		language: "en",
 		auth: {
-			"transitionId": "",
-            "transitionKey": ""
+			"transactionId": "",
+            "transactionKey": ""
 		},
 		senderDetails: {
 			"senderId": "",
