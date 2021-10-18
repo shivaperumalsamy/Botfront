@@ -383,9 +383,9 @@ class Widget extends Component {
             socket.on('bot_uttered', botUttered => {
                 // botUttered.attachment.payload.elements = [botUttered.attachment.payload.elements];
                 // console.log("botUttered", botUttered);
-                const jwtToken = botUttered.jwtToken ? botUttered.jwtToken : 'testToken';
+                const accessToken = botUttered.accessToken ? botUttered.accessToken : 'testToken';
                 if (!sessionStorage.getItem('JWT_TOKEN'))
-                    sessionStorage.setItem('JWT_TOKEN', jwtToken);
+                    sessionStorage.setItem('JWT_TOKEN', accessToken);
                 this.handleBotUtterance(botUttered);
             });
 
