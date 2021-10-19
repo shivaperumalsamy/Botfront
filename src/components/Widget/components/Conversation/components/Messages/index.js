@@ -114,8 +114,8 @@ class Messages extends Component {
             const renderMessage = (message, index) => (
                 <div className={`rw-message ${'rw-with-avatar'}`} key={index}>
                     {
-                        // profileAvatar &&
-                        // message.get('showAvatar') &&
+                        profileAvatar &&
+                        message.get('showAvatar') &&
                         <img
                             src="https://www.pngkit.com/png/detail/988-9886241_hotel-computer-icons-linkedin-native-advertising-chatbot-gloucester.png"
                             className="rw-avatar"
