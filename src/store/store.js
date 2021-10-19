@@ -29,10 +29,12 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
         }
         const emitMessage = payload => {
             const emit = () => {
-                const jwtToken = sessionStorage.getItem('JWT_TOKEN') || null;
+                const accessToken = sessionStorage.getItem('ACCESS_TOKEN') || null;
+                const toFilter = ['url', 'parameters'];
+                Object.keys(socket.customData.auth).filter(key => toFilter.includes(key)).forEach(key => delete socket.customData.auth[key]);
                 socket.emit('user_uttered', {
                     message: payload,
-                    customData: { ...socket.customData, jwtToken },
+                    customData: { ...socket.customData, accessToken },
                     session_id: sessionId,
                 });
                 store.dispatch({

@@ -34,6 +34,7 @@ import {
     setCustomCss,
 } from 'actions';
 import { safeQuerySelectorAll } from 'utils/dom';
+import { post } from 'utils/fetch';
 import { SESSION_NAME, NEXT_MESSAGE } from 'constants';
 import { isVideo, isImage, isButtons, isText, isCarousel } from './msgProcessor';
 import WidgetLayout from './layout';
@@ -95,6 +96,7 @@ class Widget extends Component {
             if (!initialized) {
                 this.initializeWidget();
             }
+            console.log("isChatOpen true")
             this.trySendInitPayload();
         }
 
@@ -384,8 +386,8 @@ class Widget extends Component {
                 // botUttered.attachment.payload.elements = [botUttered.attachment.payload.elements];
                 // console.log("botUttered", botUttered);
                 const accessToken = botUttered.accessToken ? botUttered.accessToken : 'testToken';
-                if (!sessionStorage.getItem('JWT_TOKEN'))
-                    sessionStorage.setItem('JWT_TOKEN', accessToken);
+                if (!sessionStorage.getItem('ACCESS_TOKEN'))
+                    sessionStorage.setItem('ACCESS_TOKEN', accessToken);
                 this.handleBotUtterance(botUttered);
             });
 
@@ -487,6 +489,10 @@ class Widget extends Component {
 
             // check that session_id is confirmed
             if (!sessionId) return;
+
+            const response = post(customData.auth.url, {userId: customData.auth.parameters.userId , userName: customData.auth.parameters.userName});
+            console.log("fetch response", customData, response);
+            customData.auth["token"] = response.token || 'testToken';
 
             // eslint-disable-next-line no-console
             // console.log('sending init payload', sessionId);

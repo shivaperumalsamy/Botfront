@@ -17,6 +17,10 @@ module.exports = {
         port: process.env.PORT, // Defaults to 8080
         open: true, // Open the page in browser
         contentBase: path.resolve(__dirname, '/lib'),
+        disableHostCheck: true,
+        allowedHosts: [
+            '.ngrok.io.'
+        ],
     },
     resolve: {
         extensions: ['.js', '.jsx'],
