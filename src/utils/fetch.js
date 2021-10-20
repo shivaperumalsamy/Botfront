@@ -1,5 +1,3 @@
-import fetch from "isomorphic-unfetch"; 
-
 export async function post(url, jsonToStringify) {
     let options = {
         method: "POST",
@@ -7,6 +5,7 @@ export async function post(url, jsonToStringify) {
         headers: {
             "Content-Type": "application/json",
         },
-    };
-    return await fetch(url, options);
+    }; 
+    let response = await fetch(url, options);
+    return await response.json()
 }
