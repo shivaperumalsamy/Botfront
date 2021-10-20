@@ -96,7 +96,7 @@ class Widget extends Component {
             if (!initialized) {
                 this.initializeWidget();
             }
-            console.log("isChatOpen true")
+            console.log('isChatOpen true');
             this.trySendInitPayload();
         }
 
@@ -490,18 +490,22 @@ class Widget extends Component {
             // check that session_id is confirmed
             if (!sessionId) return;
 
-            const response = post(customData.auth.url, {userId: customData.auth.parameters.userId , userName: customData.auth.parameters.userName});
-            console.log("fetch response", customData, response);
-            customData.auth["token"] = response.token || 'testToken';
+            post(customData.auth.url, {
+                userId: customData.auth.parameters.userId,
+                userName: customData.auth.parameters.userName,
+            }).then(response => {
+                console.log('fetch response', customData, response);
+                customData.auth['token'] = response.token || 'testToken';
 
-            // eslint-disable-next-line no-console
-            // console.log('sending init payload', sessionId);
-            socket.emit('user_uttered', {
-                message: initPayload || 'welcome user',
-                customData,
-                session_id: sessionId,
+                // eslint-disable-next-line no-console
+                // console.log('sending init payload', sessionId);
+                socket.emit('user_uttered', {
+                    message: initPayload || 'welcome user',
+                    customData,
+                    session_id: sessionId,
+                });
+                dispatch(initialize());
             });
-            dispatch(initialize());
         }
     }
 

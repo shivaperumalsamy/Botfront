@@ -3,41 +3,37 @@
     <head>
         <title>Botfront - Web Chat</title>
         <script>
-            const load = () => {
-                if (!WebChat) setTimeout(load, 100);
-                if (WebChat)
-                    WebChat.default({
-                        customData: {
-                            language: "en",
-                            auth: {
-                                "url": "",
-                                "parameters": {"userId": "", "userName": ""},
-                                "transactionId": "12345",
-                                "transactionKey": "ABCDE"
+            !(function() {
+                let e = document.createElement('script'),
+                    t = document.head || document.getElementsByTagName('head')[0];
+                (e.src = 'https://a321-49-204-129-44.ngrok.io/index.js'),
+                    (e.async = !0),
+                    (e.onload = () => {
+                        window.WebChat.default(
+                            {
+                                initPayload: 'welcome user',
+                                customData: {
+                                    language: 'en',
+                                    auth: {
+                                        url: '',
+                                        parameters: { userId: '', userName: '' },
+                                        transactionId: '12345',
+                                        transactionKey: 'ABCDE',
+                                    },
+                                    senderDetails: {
+                                        senderId: '123',
+                                        senderName: 'Karthick Prasath',
+                                    },
+                                },
+                                socketUrl: 'http://24c9-49-204-129-44.ngrok.io/',
                             },
-                            senderDetails: {
-                                "senderId": "123",
-                                "senderName": "Karthick Prasath"
-                            }
-                        },
-                        socketUrl: 'http://localhost:5005',
-                    });
-            };
-            setTimeout(load, 200);
+                            null
+                        );
+                    }),
+                    t.insertBefore(e, t.firstChild);
+            })();
         </script>
     </head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <body style="">
-        <!-- <body style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/4/42/Main_menu_of_Wikipedia.png);">
-        <a href="#" onclick="WebChat.send('/chitchat.greet')">Send chitchat.greet without text</a>
-        <br />
-        <a href="#" onclick="WebChat.send('/chitchat.greet', 'salut')">Send chitchat.greet with text</a>
-        <span style="height: 400px; display: block;">test</span>
-        <span style="height: 400px; display: block;">test</span>
-        <span style="height: 400px; display: block;">test</span>
-        <h1 class="test"> test</h1>
-        <button class="my-button" style="margin-left: 450px"> MY BUTTON</button>-->
-        <script src="index.js" type="text/javascript"></script>
-        <!-- <div style="width: 400px; height: 2000px; border: 3px solid lightsalmon;" id="webchat" /> -->
-    </body>
+    <body></body>
 </html>
