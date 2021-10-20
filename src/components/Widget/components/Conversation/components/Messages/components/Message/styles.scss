@@ -23,7 +23,7 @@
     }
 
     .#{$namespace}client {
-        @include message-bubble($blue-1, $white);
+        @include message-bubble($blue-1, $white, 15px 0px 15px 15px);
         background-color: $tertiary;
         max-width: 85%;
         margin-left: auto;
