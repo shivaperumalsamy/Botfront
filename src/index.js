@@ -224,7 +224,7 @@ ConnectedWidget.defaultProps = {
     badge: 0,
     embedded: false,
     params: {
-        storage: 'local',
+        storage: 'session',
     },
     docViewer: true,
     showCloseButton: true,
