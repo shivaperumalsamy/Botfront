@@ -10,7 +10,7 @@ $fontfamily: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     max-width: 215px;
     text-align: left;
     font-family: $fontfamily;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 @mixin borderless-message-bubble($color, $textColor) {
@@ -172,6 +172,6 @@ $fontfamily: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     line-height: 20px;
     flex-wrap: wrap;
-    font-size: 15px;
+    font-size: 14px;
     font-family: $fontfamily;
 }
