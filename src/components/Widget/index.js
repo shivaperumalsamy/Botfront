@@ -96,7 +96,6 @@ class Widget extends Component {
             if (!initialized) {
                 this.initializeWidget();
             }
-            console.log('isChatOpen true');
             this.trySendInitPayload();
         }
 
@@ -490,22 +489,33 @@ class Widget extends Component {
             // check that session_id is confirmed
             if (!sessionId) return;
 
-            post(customData.auth.url, {
-                userId: customData.auth.parameters.userId,
-                userName: customData.auth.parameters.userName,
-            }).then(response => {
-                console.log('fetch response', customData, response);
-                customData.auth['token'] = response.token || 'testToken';
-
-                // eslint-disable-next-line no-console
-                // console.log('sending init payload', sessionId);
+            if(customData.auth.url.length > 0) {
+                post(customData.auth.url, {
+                    userId: customData.auth.parameters.userId,
+                    userName: customData.auth.parameters.userName,
+                }).then(response => {
+                    console.log('fetch response', customData, response);
+                    customData.auth['token'] = response.token || 'testToken';
+    
+                    // eslint-disable-next-line no-console
+                    // console.log('sending init payload', sessionId);
+                    socket.emit('user_uttered', {
+                        message: initPayload || 'welcome user',
+                        customData,
+                        session_id: sessionId,
+                    });
+                    dispatch(initialize());
+                });
+            } else {
+                customData.auth['token'] = 'testToken';
                 socket.emit('user_uttered', {
                     message: initPayload || 'welcome user',
                     customData,
                     session_id: sessionId,
                 });
                 dispatch(initialize());
-            });
+            }
+            
         }
     }
 
