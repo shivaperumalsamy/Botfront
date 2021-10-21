@@ -487,7 +487,7 @@ class Widget extends Component {
             // check that session_id is confirmed
             if (!sessionId) return;
 
-            emitMsg(socket, customData, initPayload || '/welcome');
+            emitMsg(socket, customData, initPayload || '/welcome', sessionId);
 
             dispatch(initialize());
         }

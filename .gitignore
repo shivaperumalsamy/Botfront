@@ -17,4 +17,4 @@ coverage
 .vscode
 .github
 CHANGELOG.md
-package-lock.json
+.env

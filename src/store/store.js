@@ -38,7 +38,7 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
                         session_id: sessionId,
                     });
                 } else {
-                    emitMsg(socket, socket.customData, payload);
+                    emitMsg(socket, socket.customData, payload, sessionId);
                 }
                 store.dispatch({
                     type: actionTypes.ADD_NEW_USER_MESSAGE,
