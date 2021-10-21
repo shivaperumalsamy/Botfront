@@ -8,7 +8,7 @@ import metadata from './reducers/metadataReducer';
 
 import { getLocalSession } from './reducers/helper';
 import * as actionTypes from './actions/actionTypes';
-import { post } from '../utils/fetch';
+import { emitMsg } from 'utils/emitMsg';
 
 const cleanURL = url => {
     const regexProtocolHostPort = /https?:\/\/(([A-Za-z0-9-])+(\.?))+[a-z]+(:[0-9]+)?/;
@@ -38,30 +38,7 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
                         session_id: sessionId,
                     });
                 } else {
-                    if (socket.customData.auth.url.length > 0) {
-                        post(socket.customData.auth.url, {
-                            userId: socket.customData.auth.parameters.userId,
-                            userName: socket.customData.auth.parameters.userName,
-                        }).then(response => {
-                            socket.customData.auth['token'] =
-                                response.token ||
-                                'QBqa5nInszTruDUQayoEokoF08jW%2FnK6YhM55BahiyQRO2NkM6oSlvIBC%2Bio6iCznxH11lucohTi%0D%0ArWN4FbU6PeYqOIRd4PNeDXuhk%2FXNDpN4C1o9p88saGEu%2BctB%2Bhh6Fjdgw60AyudMD8Kl45JUNR%2BC%0D%0AOMIfyyJ4yIOBqCcuGtlSXyw2kjM2NfH48TIEQVEh05POk7Z3IMHaDOHiSWs05pqVJxPVL2Sq5FX4%0D%0AjZ97hZ3XFwzEd9gHJn5d0v3nfFShVq6IxqyFy3Gmr%2Bbc8f6M8nq99XUGAAb7tonMjSDyACo%3D';
-
-                            socket.emit('user_uttered', {
-                                message: payload,
-                                customData: socket.customData,
-                                session_id: sessionId,
-                            });
-                        });
-                    } else {
-                        socket.customData.auth['token'] =
-                            'QBqa5nInszTruDUQayoEokoF08jW%2FnK6YhM55BahiyQRO2NkM6oSlvIBC%2Bio6iCznxH11lucohTi%0D%0ArWN4FbU6PeYqOIRd4PNeDXuhk%2FXNDpN4C1o9p88saGEu%2BctB%2Bhh6Fjdgw60AyudMD8Kl45JUNR%2BC%0D%0AOMIfyyJ4yIOBqCcuGtlSXyw2kjM2NfH48TIEQVEh05POk7Z3IMHaDOHiSWs05pqVJxPVL2Sq5FX4%0D%0AjZ97hZ3XFwzEd9gHJn5d0v3nfFShVq6IxqyFy3Gmr%2Bbc8f6M8nq99XUGAAb7tonMjSDyACo%3D';
-                        socket.emit('user_uttered', {
-                            message: payload,
-                            customData: socket.customData,
-                            session_id: sessionId,
-                        });
-                    }
+                    emitMsg(socket, socket.customData, payload);
                 }
                 store.dispatch({
                     type: actionTypes.ADD_NEW_USER_MESSAGE,
