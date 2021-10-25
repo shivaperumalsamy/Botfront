@@ -42,12 +42,12 @@
     }
 
     .#{$namespace}title {
-        font-size: 20px;
+        font-size: 16px;
         margin: 0;
         font-family: $fontfamily;
         position: absolute;
-        left: 20px;
-        font-weight: 700;
+        left: 53px;
+        font-weight: 400;
         &.#{$namespace}with-avatar {
             left: 58px;
         }

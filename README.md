@@ -36,7 +36,12 @@
 
 ```html
 1. npm install
-2. DEV: npm run dev
+2. DEV deployment steps: 
+    npm run dev
+3. PROD deployment steps: 
+    npm run build
+    cd lib
+    python3 -m http.server PORT_NUMBER
 ```
 <br />
 
@@ -52,45 +57,14 @@ In your `<body/>`:
     !(function() {
         let e = document.createElement('script'),
             t = document.head || document.getElementsByTagName('head')[0];
-        (e.src = 'https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js'),
-            // Replace 1.x.x with the version that you want
+        (e.src = 'https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js'), // Replace BOTFRONT URL
             (e.async = !0),
             (e.onload = () => {
                 window.WebChat.default(
                     {
+                        initPayload: '/welcome', // welcome payload for proactive message 
                         customData: { language: 'en' }, // please refer customData below
-                        socketUrl: 'https://bf-botfront.development.agents.botfront.cloud',
-                        // add other props here
-                    },
-                    null
-                );
-            }),
-            t.insertBefore(e, t.firstChild);
-    })();
-</script>
-```
-#### Method 2:
-```html
-<script>
-    !(function() {
-        let e = document.createElement('script'),
-            t = document.head || document.getElementsByTagName('head')[0];
-        (e.src = 'https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js'),
-            (e.async = !0),
-            (e.onload = () => {
-                window.WebChat.default(
-                    {
-                        selector: '#webchat',
-                        initPayload: '/greet',
-                        customData: { language: 'en' }, // please refer customData below
-                        socketUrl: 'http://localhost:5005/',
-                        socketPath: '/socket.io/',
-                        title: 'State of Utah Court Bot',
-                        subtitle: 'Online',
-                        params: { storage: 'session' },
-                        displayUnreadCount: true,
-                        showMessageDate: true,
-                        profileAvatar: '',
+                        socketUrl: 'http://localhost:5005/', // RASA URL
                     },
                     null
                 );
@@ -103,37 +77,14 @@ In your `<body/>`:
 #### customData Reference:
 ```html
 <script>
-Option A:
-
 {
 	customData: {
 		language: "en",
 		auth: {
-			"transactionId": "",
-            "transactionKey": ""
-		},
-		senderDetails: {
-			"senderId": "",
-			"senderName": ""
+			"url": "", // MyCase REST URL to get the token
+            "parameters": "" // Required parameters for REST URRL
 		},
 		accessToken: "",
-	}
-}
-
-Option B:
-
-{
-	customData: {
-		language: "en",
-		auth: {
-			"token": ""
-		},
-		senderDetails: {
-			"senderId": "",
-			"senderName": ""
-		},
-		accessToken: "",
-		refreshToken: ""
 	}
 }
 </script>

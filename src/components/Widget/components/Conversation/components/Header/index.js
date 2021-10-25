@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import close from 'assets/clear-button.svg';
 import fullscreen from 'assets/fullscreen_button.svg';
 import fullscreenExit from 'assets/fullscreen_exit_button.svg';
+import logo from 'assets/state_of_utah.png';
 import './style.scss';
 import ThemeContext from '../../../../ThemeContext';
 
@@ -27,9 +28,7 @@ const Header = ({
                 style={{ backgroundColor: mainColor }}
                 className={`rw-header ${subtitle ? 'rw-with-subtitle' : ''}`}
             >
-                {profileAvatar && (
-                    <img src={profileAvatar} className="rw-avatar" alt="chat avatar" />
-                )}
+                <img src={logo} className="rw-avatar" alt="chat avatar" />
                 <div className="rw-header-buttons">
                     {showFullScreenButton && (
                         <button className="rw-toggle-fullscreen-button" onClick={toggleFullScreen}>

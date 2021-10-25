@@ -207,34 +207,35 @@ ConnectedWidget.propTypes = {
 };
 
 ConnectedWidget.defaultProps = {
-    title: 'State of Utah Chatbot',
+    title: 'Courtie',
     subtitle: '',
     customData: {},
-    inputTextFieldHint: 'Type a message...',
+    inputTextFieldHint: 'Message here...',
     connectingText: 'Waiting for server...',
     fullScreenMode: false,
     hideWhenNotConnected: true,
-    autoClearCache: false,
+    autoClearCache: true,
     connectOn: 'mount',
     onSocketEvent: {},
     protocol: 'socketio',
     socketUrl: 'http://localhost',
+    socketPath: '/socket.io/',
     protocolOptions: {},
     badge: 0,
     embedded: false,
     params: {
-        storage: 'local',
+        storage: 'session',
     },
-    docViewer: false,
+    docViewer: true,
     showCloseButton: true,
-    showFullScreenButton: false,
+    showFullScreenButton: true,
     displayUnreadCount: true,
     showMessageDate: true,
     customMessageDelay: message => {
         // let delay = message.length * 30;
         // if (delay > 3 * 1000) delay = 3 * 1000;
         // if (delay < 800) delay = 800;
-        let delay = 600;
+        let delay = 700;
         return delay;
     },
     tooltipPayload: null,
@@ -252,6 +253,7 @@ ConnectedWidget.defaultProps = {
     userBackgroundColor: '',
     assistTextColor: '',
     assistBackgoundColor: '',
+    withRules: true,
 };
 
 export default ConnectedWidget;

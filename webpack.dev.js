@@ -2,6 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { version } = require('./package.json');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 module.exports = {
     // entry: ['babel-polyfill', './index.js'],
     entry: './umd.js',
@@ -17,6 +21,8 @@ module.exports = {
         port: process.env.PORT, // Defaults to 8080
         open: true, // Open the page in browser
         contentBase: path.resolve(__dirname, '/lib'),
+        disableHostCheck: true,
+        public: process.env.NGROK_URL || '',
     },
     resolve: {
         extensions: ['.js', '.jsx'],

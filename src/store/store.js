@@ -8,6 +8,7 @@ import metadata from './reducers/metadataReducer';
 
 import { getLocalSession } from './reducers/helper';
 import * as actionTypes from './actions/actionTypes';
+import { emitMsg } from 'utils/emitMsg';
 
 const cleanURL = url => {
     const regexProtocolHostPort = /https?:\/\/(([A-Za-z0-9-])+(\.?))+[a-z]+(:[0-9]+)?/;
@@ -29,12 +30,16 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
         }
         const emitMessage = payload => {
             const emit = () => {
-                const jwtToken = sessionStorage.getItem('JWT_TOKEN') || null;
-                socket.emit('user_uttered', {
-                    message: payload,
-                    customData: { ...socket.customData, jwtToken },
-                    session_id: sessionId,
-                });
+                const accessToken = sessionStorage.getItem('ACCESS_TOKEN') || null;
+                if (accessToken) {
+                    socket.emit('user_uttered', {
+                        message: payload,
+                        customData: { accessToken },
+                        session_id: sessionId,
+                    });
+                } else {
+                    emitMsg(socket, socket.customData, payload, sessionId);
+                }
                 store.dispatch({
                     type: actionTypes.ADD_NEW_USER_MESSAGE,
                     text: 'text',
