@@ -35,7 +35,7 @@
 ## Steps to run
 
 ```html
-1. npm install
+1. npm ci
 2. DEV deployment steps: 
     npm run dev
 3. PROD deployment steps: 
