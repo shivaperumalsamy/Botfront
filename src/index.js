@@ -57,19 +57,19 @@ const ConnectedWidget = forwardRef((props, ref) => {
             );
             // We set a function on session_confirm here so as to avoid any race condition
             // this will be called first and will set those parameters for everyone to use.
-            this.socket.on('session_confirm', sessionObject => {
+            this.socket.on('session_confirm', (sessionObject) => {
                 this.sessionConfirmed = true;
                 this.sessionId =
                     sessionObject && sessionObject.session_id
                         ? sessionObject.session_id
                         : sessionObject;
             });
-            this.onEvents.forEach(event => {
+            this.onEvents.forEach((event) => {
                 this.socket.on(event.event, event.callback);
             });
 
             this.onEvents = [];
-            Object.keys(this.onSocketEvent).forEach(event => {
+            Object.keys(this.onSocketEvent).forEach((event) => {
                 this.socket.on(event, this.onSocketEvent[event]);
             });
         }
@@ -226,12 +226,12 @@ ConnectedWidget.defaultProps = {
     params: {
         storage: 'session',
     },
-    docViewer: true,
+    docViewer: false,
     showCloseButton: true,
     showFullScreenButton: true,
     displayUnreadCount: true,
     showMessageDate: true,
-    customMessageDelay: message => {
+    customMessageDelay: (message) => {
         // let delay = message.length * 30;
         // if (delay > 3 * 1000) delay = 3 * 1000;
         // if (delay < 800) delay = 800;
