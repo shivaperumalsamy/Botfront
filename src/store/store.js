@@ -10,25 +10,25 @@ import { getLocalSession } from './reducers/helper';
 import * as actionTypes from './actions/actionTypes';
 import { emitMsg } from 'utils/emitMsg';
 
-const cleanURL = url => {
+const cleanURL = (url) => {
     const regexProtocolHostPort = /https?:\/\/(([A-Za-z0-9-])+(\.?))+[a-z]+(:[0-9]+)?/;
     const regexLastTrailingSlash = /\/$|\/(?=\?)/;
     return url.replace(regexProtocolHostPort, '').replace(regexLastTrailingSlash, '');
 };
 
-const trimQueryString = url => {
+const trimQueryString = (url) => {
     const regexQueryString = /\?.+$/;
     return url.replace(regexQueryString, '');
 };
 
 function initStore(connectingText, socket, storage, docViewer = false, onWidgetEvent) {
-    const customMiddleWare = store => next => action => {
+    const customMiddleWare = (store) => (next) => (action) => {
         const localSession = getLocalSession(storage, SESSION_NAME);
         let sessionId = localSession ? localSession.session_id : null;
         if (!sessionId && socket.sessionId) {
             sessionId = socket.sessionId;
         }
-        const emitMessage = payload => {
+        const emitMessage = (payload) => {
             const emit = () => {
                 const accessToken = sessionStorage.getItem('ACCESS_TOKEN') || null;
                 if (accessToken) {
@@ -45,6 +45,10 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
                     text: 'text',
                     nextMessageIsTooltip: false,
                     hidden: true,
+                });
+                store.dispatch({
+                    type: actionTypes.TRIGGER_MESSAGE_DELAY,
+                    messageDelayed: true,
                 });
             };
             if (socket.sessionConfirmed) {
@@ -79,7 +83,7 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
 
                 if (store.getState().behavior.get('oldUrl') !== newUrl) {
                     const { pageChanges, errorIntent } = pageCallbacksJs;
-                    const matched = pageChanges.some(callback => {
+                    const matched = pageChanges.some((callback) => {
                         if (callback.regex) {
                             if (newUrl.match(callback.url)) {
                                 emitMessage(callback.callbackIntent);
