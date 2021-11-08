@@ -8,6 +8,7 @@ import { Video, Image, Message, Carousel, ChargeCarousel, Buttons } from 'messag
 
 import './styles.scss';
 import ThemeContext from '../../../../ThemeContext';
+import { MessageTone } from './messageTone';
 
 const isToday = (date) => {
     const today = new Date();
@@ -150,6 +151,7 @@ class Messages extends Component {
                 </div>
             ));
         };
+
         const { conversationBackgroundColor, assistBackgoundColor } = this.context;
 
         return (
@@ -159,6 +161,7 @@ class Messages extends Component {
                 className="rw-messages-container"
             >
                 {renderMessages()}
+                {<MessageTone />}
                 {displayTypingIndication && (
                     <div
                         className={`rw-message rw-typing-indication ${
