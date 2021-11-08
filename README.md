@@ -10,7 +10,7 @@ A chat widget to deploy virtual assistants made with [Rasa](https://github.com/r
 
 ![Image](./rasa_webchat.gif 'icon')
 
-#### Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
+Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
 
 ---
 
