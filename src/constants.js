@@ -65,7 +65,7 @@ export const PROP_TYPES = {
         id: PropTypes.number,
         elements: ImmutablePropTypes.listOf(
             ImmutablePropTypes.mapContains({
-                sequence: PropTypes.string,
+                sequence: PropTypes.number,
                 offense: PropTypes.string,
                 severity: PropTypes.string,
                 offense_date: PropTypes.string,
