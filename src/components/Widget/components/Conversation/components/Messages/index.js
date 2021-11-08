@@ -160,8 +160,8 @@ class Messages extends Component {
                 style={{ backgroundColor: conversationBackgroundColor }}
                 className="rw-messages-container"
             >
-                {renderMessages()}
                 {<MessageTone />}
+                {renderMessages()}
                 {displayTypingIndication && (
                     <div
                         className={`rw-message rw-typing-indication ${
