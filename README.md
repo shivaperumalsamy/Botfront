@@ -28,11 +28,28 @@ Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x o
 
 ---
 
-## Steps to run
+## Steps To Run
 
-```html
-1. npm ci 2. DEV deployment steps: npm run dev 3. PROD deployment steps: npm run build cd lib
-python3 -m http.server PORT_NUMBER
+#### Continuous Integration/Install Command:
+
+```bash
+$ npm ci
+```
+
+#### DEV Deployment Steps:
+
+```bash
+$ npm run dev
+```
+
+#### PROD Deployment Steps:
+
+```bash
+$ npm run build
+
+$ cd lib
+
+$ python3 -m http.server PORT_NUMBER
 ```
 
 ---
@@ -89,7 +106,7 @@ In your `<body/>`:
 Install the [npm package](https://npmjs.com/rasa-webchat):
 
 ```bash
-npm install rasa-webchat
+$ npm install rasa-webchat
 ```
 
 Then:
