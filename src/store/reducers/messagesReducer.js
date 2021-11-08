@@ -5,6 +5,7 @@ import {
     createButtons,
     createNewMessage,
     createCarousel,
+    createChargeCarousel,
     createVideoSnippet,
     createImageSnippet,
     createComponentMessage,
@@ -14,7 +15,7 @@ import {
 
 import * as actionTypes from '../actions/actionTypes';
 
-export default function(storage) {
+export default function (storage) {
     const initialState = List([]);
 
     return function reducer(state = initialState, action) {
@@ -44,6 +45,11 @@ export default function(storage) {
             case actionTypes.ADD_CAROUSEL: {
                 return storeMessage(
                     state.push(createCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
+                );
+            }
+            case actionTypes.ADD_CHARGECAROUSEL: {
+                return storeMessage(
+                    state.push(createChargeCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
                 );
             }
             case actionTypes.ADD_NEW_VIDEO_VIDREPLY: {
@@ -81,7 +87,7 @@ export default function(storage) {
             }
             case actionTypes.SET_CUSTOM_CSS: {
                 return storeMessage(
-                    state.update(state.size - 1, message =>
+                    state.update(state.size - 1, (message) =>
                         message.set('customCss', fromJS(action.customCss))
                     )
                 );

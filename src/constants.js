@@ -11,6 +11,7 @@ export const MESSAGE_SENDER = {
 export const MESSAGES_TYPES = {
     TEXT: 'text',
     CAROUSEL: 'carousel',
+    CHARGECAROUSEL: 'charge-carousel',
     VIDREPLY: {
         VIDEO: 'vidreply',
     },
@@ -55,6 +56,19 @@ export const PROP_TYPES = {
                 imageUrl: PropTypes.string,
                 buttons: ImmutablePropTypes.listOf(replybuttons),
                 defaultActions: replybuttons,
+            })
+        ),
+        sender: senderType,
+    }),
+
+    CHARGECAROUSEL: ImmutablePropTypes.contains({
+        id: PropTypes.number,
+        elements: ImmutablePropTypes.listOf(
+            ImmutablePropTypes.mapContains({
+                sequence: PropTypes.string,
+                offense: PropTypes.string,
+                severity: PropTypes.string,
+                offense_date: PropTypes.string,
             })
         ),
         sender: senderType,
