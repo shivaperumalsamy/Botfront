@@ -118,11 +118,7 @@ class Messages extends Component {
             const renderMessage = (message, index) => (
                 <div className={`rw-message ${'rw-with-avatar'}`} key={index}>
                     {profileAvatar && message.get('showAvatar') && (
-                        <img
-                            src="https://www.pngkit.com/png/detail/988-9886241_hotel-computer-icons-linkedin-native-advertising-chatbot-gloucester.png"
-                            className="rw-avatar"
-                            alt="profile"
-                        />
+                        <img src={profileAvatar} className="rw-avatar" alt="profile" />
                     )}
                     {this.getComponentToRender(message, index, index === messages.size - 1)}
                     {renderMessageDate(message)}
@@ -148,6 +144,7 @@ class Messages extends Component {
             return groups.map((g, index) => (
                 <div className={`rw-group-message rw-from-${g && g.from}`} key={`group_${index}`}>
                     {g.messages}
+                    {g && g.from === 'response' ? <MessageTone text={g.messages} /> : null}
                 </div>
             ));
         };
@@ -160,7 +157,6 @@ class Messages extends Component {
                 style={{ backgroundColor: conversationBackgroundColor }}
                 className="rw-messages-container"
             >
-                {<MessageTone />}
                 {renderMessages()}
                 {displayTypingIndication && (
                     <div
