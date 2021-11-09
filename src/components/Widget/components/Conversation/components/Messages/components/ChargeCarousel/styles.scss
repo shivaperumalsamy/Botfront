@@ -17,15 +17,19 @@
 
     .#{$namespace}carousel-card {
         display: inline-block;
-        max-width: 250px;
-        width: 250px;
+        max-width: 220px;
+        width: 220px;
         min-width: 220px;
-        min-height: 324px;
-        margin: 3px 13px 3px 1px;
+        min-height: 320px;
+        margin: 12px;
+        padding: 10px;
         box-shadow: 4px 2px 12px 1px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
 
         .#{$namespace}carousel-card-image {
             width: 100%;
@@ -34,33 +38,39 @@
             display: block;
             // this is so that it's not empty while loading
             background-color: $grey-3;
-            cursor: pointer;
+            // cursor: pointer;
+        }
+
+        .#{$namespace}hr-line {
+            border-top: 1px solid $grey-2;
+            border-bottom: 1px solid $grey-2;
         }
 
         .#{$namespace}carousel-card-title {
-            display: block;
-            margin: 7px 10px 2px 9px;
+            margin: 7px;
             font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
             overflow: hidden;
+            white-space: normal;
             text-overflow: ellipsis;
-            cursor: pointer;
+            cursor: default;
             text-decoration: none;
             color: inherit;
-            opacity: 0.5;
-            font-size: 0.8em;
         }
 
         .#{$namespace}carousel-card-subtitle {
             display: block;
-            margin: 0 9px 8px 9px;
-            opacity: 1;
-            font-size: 1em;
+            margin: 7px;
             overflow: hidden;
             white-space: normal;
             line-height: initial;
-            cursor: pointer;
+            cursor: default;
             text-decoration: none;
             color: inherit;
+            opacity: 0.5;
+            font-size: 0.9em;
         }
 
         .#{$namespace}carousel-buttons-container {

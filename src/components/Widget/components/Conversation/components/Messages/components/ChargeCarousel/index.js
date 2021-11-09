@@ -60,150 +60,22 @@ const ChargeCarousel = (props) => {
                 onScroll={() => handleScroll()}
             >
                 {carousel.elements.map((carouselCard, index) => {
-                    const defaultActionUrl =
-                        carouselCard.default_action &&
-                        carouselCard.default_action.type === 'web_url'
-                            ? carouselCard.default_action.url
-                            : null;
                     return (
                         <div className="rw-carousel-card" key={index}>
-                            <a
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                onClick={() => handleClick(carouselCard.default_action)}
-                            >
-                                {carouselCard.image_url ? (
-                                    <img
-                                        className="rw-carousel-card-image"
-                                        src={carouselCard.image_url}
-                                        alt={`${carouselCard.title} ${carouselCard.subtitle}}}`}
-                                    />
-                                ) : (
-                                    <div className="" />
-                                )}
-                            </a>
-                            <a
-                                className="rw-carousel-card-title"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {'Offense Details'}
-                            </a>
-                            <a
-                                className="rw-carousel-card-subtitle"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {'Sequence'}
-                            </a>
-                            <a
-                                className="rw-carousel-card-title"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {carouselCard.sequence}
-                            </a>
-                            <a
-                                className="rw-carousel-card-subtitle"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {'Offense'}
-                            </a>
-                            <a
-                                className="rw-carousel-card-title"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {carouselCard.offense}
-                            </a>
-                            <a
-                                className="rw-carousel-card-subtitle"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {'Severity'}
-                            </a>
-                            <a
-                                className="rw-carousel-card-title"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {carouselCard.severity}
-                            </a>
-                            <a
-                                className="rw-carousel-card-subtitle"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {'Offense Date'}
-                            </a>
-                            <a
-                                className="rw-carousel-card-title"
-                                href={defaultActionUrl}
-                                target={linkTarget || '_blank'}
-                                rel="noopener noreferrer"
-                                // onClick={() => handleClick(carouselCard.default_action)}
-                                style={{ color: assistTextColor }}
-                            >
-                                {carouselCard.offense_date}
-                            </a>
-                            {/* <div className="rw-carousel-buttons-container">
-                {carouselCard.buttons.map((button, buttonIndex) => {
-                  if (button.type === 'web_url') {
-                    return (
-                      <a
-                        key={buttonIndex}
-                        href={button.url}
-                        target={linkTarget || '_blank'}
-                        rel="noopener noreferrer"
-                        className="rw-reply"
-                        style={{ borderColor: mainColor, color: mainColor }}
-                      >
-                        <span>{button.title}</span>
-                      </a>
-                    );
-                  }
-                  return (
-                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                    <div
-                      key={buttonIndex}
-                      className="rw-reply"
-                      onClick={() => handleClick(button)}
-                      role="button"
-                      tabIndex={0}
-                      style={{ borderColor: mainColor, color: mainColor }}
-                    >
-                      <span>{button.title}</span>
-                    </div>
-                  );
-                })}
-              </div> */}
+                            <div className="rw-carousel-card-subtitle">
+                                🔖 {'Case Offense Details'}
+                            </div>
+                            <div className="rw-hr-line"> </div>
+                            <div className="rw-carousel-card-subtitle">{'Sequence'}</div>
+                            <div className="rw-carousel-card-title">#️⃣ {carouselCard.sequence}</div>
+                            <div className="rw-carousel-card-subtitle">{'Offense'}</div>
+                            <div className="rw-carousel-card-title">{carouselCard.offense}</div>
+                            <div className="rw-carousel-card-subtitle">{'Severity'}</div>
+                            <div className="rw-carousel-card-title">🚩 {carouselCard.severity}</div>
+                            <div className="rw-carousel-card-subtitle">{'Offense Date'}</div>
+                            <div className="rw-carousel-card-title">
+                                📅 {carouselCard.offense_date}
+                            </div>
                         </div>
                     );
                 })}
