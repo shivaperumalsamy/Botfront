@@ -2,15 +2,15 @@
 
 ## Rasa Webchat 💬
 
-You can download the source code [here](https://www.npmjs.com/package/botfront)
-
 ---
+
+You can download the source code from [NPM](https://www.npmjs.com/package/botfront) or [GitHub](https://github.com/botfront/rasa-webchat)
+
+Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
 
 A chat widget to deploy virtual assistants made with [Rasa](https://github.com/rasaHQ/rasa) or [Botfront](https://github.com/botfront/botfront?utm_source=rasa_webchat) on any website.
 
 ![Image](./rasa_webchat.gif 'icon')
-
-Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
 
 ---
 
