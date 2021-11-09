@@ -12,6 +12,7 @@ import {
     emitUserMessage,
     addResponseMessage,
     addCarousel,
+    addChargeCarousel,
     addVideoSnippet,
     addImageSnippet,
     addButtons,
@@ -36,7 +37,7 @@ import {
 import { safeQuerySelectorAll } from 'utils/dom';
 import { emitMsg } from 'utils/emitMsg';
 import { SESSION_NAME, NEXT_MESSAGE } from 'constants';
-import { isVideo, isImage, isButtons, isText, isCarousel } from './msgProcessor';
+import { isVideo, isImage, isButtons, isText, isCarousel, isChargeCarousel } from './msgProcessor';
 import WidgetLayout from './layout';
 import { storeLocalSession, getLocalSession } from '../../store/reducers/helper';
 
@@ -54,13 +55,8 @@ class Widget extends Component {
     }
 
     componentDidMount() {
-        const {
-            connectOn,
-            autoClearCache,
-            storage,
-            dispatch,
-            defaultHighlightAnimation,
-        } = this.props;
+        const { connectOn, autoClearCache, storage, dispatch, defaultHighlightAnimation } =
+            this.props;
 
         // add the default highlight css to the document
         const styleNode = document.createElement('style');
@@ -251,7 +247,7 @@ class Widget extends Component {
     addCustomsEventListeners(pageEventCallbacks) {
         const eventsListeners = [];
 
-        pageEventCallbacks.forEach(pageEvent => {
+        pageEventCallbacks.forEach((pageEvent) => {
             const { event, payload, selector } = pageEvent;
             const sendPayload = () => {
                 this.sendMessage(payload);
@@ -260,7 +256,7 @@ class Widget extends Component {
             if (event && payload && selector) {
                 const elemList = document.querySelectorAll(selector);
                 if (elemList.length > 0) {
-                    elemList.forEach(elem => {
+                    elemList.forEach((elem) => {
                         eventsListeners.push({ elem, event, sendPayload });
                         elem.addEventListener(event, sendPayload);
                     });
@@ -269,7 +265,7 @@ class Widget extends Component {
         });
 
         const cleaner = () => {
-            eventsListeners.forEach(eventsListener => {
+            eventsListeners.forEach((eventsListener) => {
                 eventsListener.elem.removeEventListener(
                     eventsListener.event,
                     eventsListener.sendPayload
@@ -285,7 +281,7 @@ class Widget extends Component {
         const domHighlightJS = domHighlight.toJS() || {};
         if (domHighlightJS.selector) {
             const elements = safeQuerySelectorAll(domHighlightJS.selector);
-            elements.forEach(element => {
+            elements.forEach((element) => {
                 switch (domHighlightJS.style) {
                     case 'custom':
                         element.setAttribute('style', '');
@@ -309,7 +305,7 @@ class Widget extends Component {
         const domHighlightJS = domHighlight.toJS() || {};
         if (domHighlightJS.selector) {
             const elements = safeQuerySelectorAll(domHighlightJS.selector);
-            elements.forEach(element => {
+            elements.forEach((element) => {
                 switch (domHighlightJS.style) {
                     case 'custom':
                         element.setAttribute('style', domHighlightJS.css);
@@ -381,7 +377,7 @@ class Widget extends Component {
         if (!socket.isInitialized()) {
             socket.createSocket();
 
-            socket.on('bot_uttered', botUttered => {
+            socket.on('bot_uttered', (botUttered) => {
                 const accessToken = botUttered.accessToken;
                 if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
                     sessionStorage.setItem('ACCESS_TOKEN', accessToken);
@@ -399,7 +395,7 @@ class Widget extends Component {
             });
 
             // When session_confirm is received from the server:
-            socket.on('session_confirm', sessionObject => {
+            socket.on('session_confirm', (sessionObject) => {
                 const remoteId =
                     sessionObject && sessionObject.session_id
                         ? sessionObject.session_id
@@ -446,7 +442,7 @@ class Widget extends Component {
                 }
             });
 
-            socket.on('disconnect', reason => {
+            socket.on('disconnect', (reason) => {
                 // eslint-disable-next-line no-console
                 console.log(reason);
                 if (reason !== 'io client disconnect') {
@@ -494,15 +490,8 @@ class Widget extends Component {
     }
 
     trySendTooltipPayload() {
-        const {
-            tooltipPayload,
-            socket,
-            customData,
-            connected,
-            isChatOpen,
-            dispatch,
-            tooltipSent,
-        } = this.props;
+        const { tooltipPayload, socket, customData, connected, isChatOpen, dispatch, tooltipSent } =
+            this.props;
 
         if (connected && !isChatOpen && !tooltipSent.get(tooltipPayload)) {
             const sessionId = this.getSessionId();
@@ -529,7 +518,7 @@ class Widget extends Component {
             dispatch(newUnreadMessage());
             this.onGoingMessageDelay = false;
             dispatch(triggerMessageDelayed(false));
-            this.messages.forEach(message => {
+            this.messages.forEach((message) => {
                 this.dispatchMessage(message);
                 dispatch(newUnreadMessage());
             });
@@ -558,6 +547,8 @@ class Widget extends Component {
             this.props.dispatch(addButtons(messageClean));
         } else if (isText(messageClean)) {
             this.props.dispatch(addResponseMessage(messageClean.text));
+        } else if (isChargeCarousel(messageClean)) {
+            this.props.dispatch(addChargeCarousel(messageClean));
         } else if (isCarousel(messageClean)) {
             this.props.dispatch(addCarousel(messageClean));
         } else if (isVideo(messageClean)) {
@@ -603,7 +594,7 @@ class Widget extends Component {
             <WidgetLayout
                 toggleChat={() => this.toggleConversation()}
                 toggleFullScreen={() => this.toggleFullScreen()}
-                onSendMessage={event => this.handleMessageSubmit(event)}
+                onSendMessage={(event) => this.handleMessageSubmit(event)}
                 title={this.props.title}
                 subtitle={this.props.subtitle}
                 customData={this.props.customData}
@@ -629,7 +620,7 @@ class Widget extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     initialized: state.behavior.get('initialized'),
     connected: state.behavior.get('connected'),
     isChatOpen: state.behavior.get('isChatOpen'),

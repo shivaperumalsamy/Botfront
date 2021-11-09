@@ -1,7 +1,7 @@
 import { Map, fromJS } from 'immutable';
 import { MESSAGES_TYPES, MESSAGE_SENDER, SESSION_NAME } from 'constants';
 
-import { Video, Image, Message, Carousel, Buttons } from 'messagesComponents';
+import { Video, Image, Message, Carousel, ChargeCarousel, Buttons } from 'messagesComponents';
 
 export function createNewMessage(text, sender, nextMessageIsTooltip, hidden) {
     return Map({
@@ -20,6 +20,16 @@ export function createCarousel(carousel, sender) {
     return Map({
         type: MESSAGES_TYPES.CAROUSEL,
         component: Carousel,
+        sender,
+        elements: fromJS(carousel.attachment.payload.elements),
+        timestamp: new Date().getTime(),
+    });
+}
+
+export function createChargeCarousel(carousel, sender) {
+    return Map({
+        type: MESSAGES_TYPES.CHARGECAROUSEL,
+        component: ChargeCarousel,
         sender,
         elements: fromJS(carousel.attachment.payload.elements),
         timestamp: new Date().getTime(),
@@ -121,7 +131,7 @@ export function storeLocalSession(storage, key, sid) {
     storage.setItem(key, JSON.stringify(session));
 }
 
-export const storeMessageTo = storage => conversation => {
+export const storeMessageTo = (storage) => (conversation) => {
     // Store a conversation List to storage
     const localSession = getLocalSession(storage, SESSION_NAME);
     const newSession = {
@@ -134,7 +144,7 @@ export const storeMessageTo = storage => conversation => {
     return conversation;
 };
 
-export const storeParamsTo = storage => params => {
+export const storeParamsTo = (storage) => (params) => {
     // Store a params List to storage
     const localSession = getLocalSession(storage, SESSION_NAME);
     const newSession = {
@@ -148,7 +158,7 @@ export const storeParamsTo = storage => params => {
     return params;
 };
 
-export const storeMetadataTo = storage => metadata => {
+export const storeMetadataTo = (storage) => (metadata) => {
     // Store a params List to storage
     const localSession = getLocalSession(storage, SESSION_NAME);
     const newSession = {

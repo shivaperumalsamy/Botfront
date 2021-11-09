@@ -1,22 +1,18 @@
-<p align="left">
-<a href="https://www.npmjs.com/package/botfront">
-    <img alt="npm" src="https://img.shields.io/npm/v/rasa-webchat.svg">
-</a>
-</p>
-<h1 align="left">Rasa Webchat 💬</h1>
-<h5 align="left">
- A chat widget to deploy virtual assistants made with <a href="https://github.com/rasaHQ/rasa">Rasa</a> or <a href="https://github.com/botfront/botfront?utm_source=rasa_webchat">Botfront</a> on any website.
-</h5>
-<br />
+![Image](https://img.shields.io/npm/v/rasa-webchat.svg 'icon')
 
-<div align="left">
-<img align="center" src="./rasa_webchat.gif" alt="demonstration">
-</div>
-<br />
+## Rasa Webchat 💬
 
-### ⚠️ Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
+---
 
-<br />
+You can download the source code from [NPM](https://www.npmjs.com/package/botfront) or [GitHub](https://github.com/botfront/rasa-webchat)
+
+Version 1.0.1 of the rasa webchat is made to work with version 2.3.x and 2.4.x of rasa. Use 1.0.0 for other rasa versions.
+
+A chat widget to deploy virtual assistants made with [Rasa](https://github.com/rasaHQ/rasa) or [Botfront](https://github.com/botfront/botfront?utm_source=rasa_webchat) on any website.
+
+![Image](./rasa_webchat.gif 'icon')
+
+---
 
 ## Features
 
@@ -30,20 +26,33 @@
 -   Smart delay between messages
 -   Easy to import in a script tag or as a React Component
 
-<br />
+---
 
-## Steps to run
+## Steps To Run
 
-```html
-1. npm ci
-2. DEV deployment steps: 
-    npm run dev
-3. PROD deployment steps: 
-    npm run build
-    cd lib
-    python3 -m http.server PORT_NUMBER
+#### Continuous Integration/Install Command:
+
+```bash
+$ npm ci
 ```
-<br />
+
+#### DEV Deployment Steps:
+
+```bash
+$ npm run dev
+```
+
+#### PROD Deployment Steps:
+
+```bash
+$ npm run build
+
+$ cd lib
+
+$ python3 -m http.server PORT_NUMBER
+```
+
+---
 
 ## Usage
 
@@ -51,10 +60,9 @@
 
 In your `<body/>`:
 
-#### Method 1:
 ```html
 <script>
-    !(function() {
+    !(function () {
         let e = document.createElement('script'),
             t = document.head || document.getElementsByTagName('head')[0];
         (e.src = 'https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js'), // Replace BOTFRONT URL
@@ -62,7 +70,7 @@ In your `<body/>`:
             (e.onload = () => {
                 window.WebChat.default(
                     {
-                        initPayload: '/welcome', // welcome payload for proactive message 
+                        initPayload: '/welcome', // welcome payload for proactive message
                         customData: { language: 'en' }, // please refer customData below
                         socketUrl: 'http://localhost:5005/', // RASA URL
                     },
@@ -75,26 +83,30 @@ In your `<body/>`:
 ```
 
 #### customData Reference:
+
 ```html
 <script>
-{
-	customData: {
-		language: "en",
-		auth: {
-			"url": "", // MyCase REST URL to get the token
-            "parameters": "" // Required parameters for REST URRL
-		},
-		accessToken: "",
-	}
-}
+    {
+    	customData: {
+    		language: "en",
+    		auth: {
+    			"url": "", // MyCase REST URL to get the token
+                "parameters": "" // Required parameters for REST URRL
+    		},
+    		accessToken: "",
+    	}
+    }
 </script>
 ```
+
+---
+
 ### As a React component
 
 Install the [npm package](https://npmjs.com/rasa-webchat):
 
 ```bash
-npm install rasa-webchat
+$ npm install rasa-webchat
 ```
 
 Then:
@@ -117,6 +129,8 @@ function CustomWidget = () => {
 
 -   Make sure to have the prop `embedded`
     set to `true` if you don't want to see the launcher.
+
+---
 
 ## Parameters
 
@@ -142,13 +156,14 @@ function CustomWidget = () => {
 | `storage`              | `"local"`          | ⚠️ This is not a prop, it has to be passed inside the params object above. <br> Specifies the storage location of the conversation state in the browser. `"session"` defines the state to be stored in the session storage. The session storage persists on reload of the page, and is cleared after the browser or tab is closed, or when `sessionStorage.clear()`is called. `"local"` defines the state to be stored in the local stoage. The local storage persists after the the browser is closed, and is cleared when the cookies of the browser are cleared, or when `localStorage.clear()`is called. |
 | `customComponent`      | `null`             | Custom component to be used with custom responses. E.g.: `customComponent={ (messageData) => (<div>Custom React component</div>)}`. Please note that this can only be used if you call the webchat from a React application as you can't write a component in pure Javscript.                                                                                                                                                                                                                                                                                                                                |
 | `onWidgetEvent`        | `{}`               | call custom code on a specific widget event ( `onChatOpen`, `onChatClose`, `onChatHidden`, are available for now ), add a function to the desired object property in the props to have it react to the event.                                                                                                                                                                                                                                                                                                                                                                                                |
+| ---                    |
 
 ### Additional Examples
 
 ##### `customMessageDelay`
 
 ```javascript
-message => {
+(message) => {
     let delay = message.length * 30;
     if (delay > 2 * 1000) delay = 3 * 1000;
     if (delay < 400) delay = 1000;
@@ -166,17 +181,19 @@ onSocketEvent={{
 }}
 ```
 
-### Other features
+---
 
-#### Tooltips
+## Other features
+
+### Tooltips
 
 Text messages received when the widget is closed will be shown as a tooltip.
 
-#### Sending a message on page load
+### Sending a message on page load
 
 When reconnecting to an existing chat session, the bot will send a message contained in the localStorage key specified by the `NEXT_MESSAGE` constant. The message should be stringified JSON with a `message` property describing the message and an `expiry` property set to a UNIX timestamp in milliseconds after which this message should not be sent. This is useful if you would like your bot to be able to offer your user to navigate around the site.
 
-#### Sending a payload from your React app
+### Sending a payload from your React app
 
 ```jsx
 function myComponent() {
@@ -200,17 +217,17 @@ The payload can be any message that the user would normally send, but if you wan
 
 The widget can be used with any backend but is primarily designed to be used with [Rasa](https://github.com/rasaHQ/rasa) or [Botfront](https://github.com/botfront/botfront).
 
-#### Rasa
+### Rasa
 
 Use the `socketio` channel: See [instructions in the Rasa documentation](https://rasa.com/docs/core/connectors/#socketio-connector)
 
 If you want to process `customData` in Rasa you have to [create a new channel](https://rasa.com/docs/core/connectors/#custom-channels). Use channel `rasa_core.channels.socketio` as a template for your new channel. In this channel, `customData` can be retrieved via `data['customData']`. Then you can modify `sender_id`, save `customData` to the database, fill slots or whatever you need to with your additional data.
 
-#### Botfront
+### Botfront
 
 The Rasa Webchat is developped by the [Botfront](https://botfront.io) team and it works with Botfront. If your bot is multilingual, make sure to specificy the current language in the `customData` prop. E.g. `customData={{language: 'en'}}`. See in [Botfront docs](https://botfront.io/docs/channels/webchat/) for more details.
 
-## Styles
+### Styles
 
 From version 0.8 we started prefixing all css classes, if you already had css styling for the widget, just prepend `rw-` to all the classes you changed.
 
@@ -259,4 +276,3 @@ hierarchy:
 | .rw-snippet                | a component for describing links                                   |
 | .rw-imageFrame             | a container for sending images                                     |
 | .rw-videoFrame             | a container for sending video                                      |
-
