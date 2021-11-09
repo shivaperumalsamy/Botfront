@@ -117,6 +117,7 @@ class Messages extends Component {
 
             const renderMessage = (message, index) => (
                 <div className={`rw-message ${'rw-with-avatar'}`} key={index}>
+                    {message.get('sender') == 'response' ? <MessageTone /> : null}
                     {profileAvatar && message.get('showAvatar') && (
                         <img src={profileAvatar} className="rw-avatar" alt="profile" />
                     )}
@@ -144,7 +145,6 @@ class Messages extends Component {
             return groups.map((g, index) => (
                 <div className={`rw-group-message rw-from-${g && g.from}`} key={`group_${index}`}>
                     {g.messages}
-                    {g && g.from === 'response' ? <MessageTone text={g.messages} /> : null}
                 </div>
             ));
         };
