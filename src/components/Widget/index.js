@@ -609,7 +609,7 @@ class Widget extends Component {
                 showFullScreenButton={this.props.showFullScreenButton}
                 hideWhenNotConnected={this.props.hideWhenNotConnected}
                 fullScreenMode={this.props.fullScreenMode}
-                playMessageTone={this.props.playMessageTone}
+                enableMessageTone={this.props.enableMessageTone}
                 messageToneMode={this.props.messageToneMode}
                 isChatOpen={this.props.isChatOpen}
                 isChatVisible={this.props.isChatVisible}
@@ -654,7 +654,7 @@ Widget.propTypes = {
     connectOn: PropTypes.oneOf(['mount', 'open']),
     autoClearCache: PropTypes.bool,
     fullScreenMode: PropTypes.bool,
-    playMessageTone: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     messageToneMode: PropTypes.bool,
     isChatVisible: PropTypes.bool,
     isChatOpen: PropTypes.bool,

@@ -16,7 +16,7 @@ const Conversation = (props) => (
             fullScreenMode={props.fullScreenMode}
             showCloseButton={props.showCloseButton}
             showFullScreenButton={props.showFullScreenButton}
-            playMessageTone={props.playMessageTone}
+            enableMessageTone={props.enableMessageTone}
             messageToneMode={props.messageToneMode}
             toggleMessageTone={props.toggleMessageTone}
             connected={props.connected}
@@ -31,6 +31,7 @@ const Conversation = (props) => (
             showMessageDate={props.showMessageDate}
             toggleMessageTone={props.toggleMessageTone}
             messageToneMode={props.messageToneMode}
+            enableMessageTone={props.enableMessageTone}
         />
         <Sender
             sendMessage={props.sendMessage}
@@ -50,7 +51,7 @@ Conversation.propTypes = {
     toggleChat: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showFullScreenButton: PropTypes.bool,
-    playMessageTone: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     toggleMessageTone: PropTypes.func,
     messageToneMode: PropTypes.bool,
     disabledInput: PropTypes.bool,

@@ -20,6 +20,7 @@ const Header = ({
     showFullScreenButton,
     messageToneMode,
     toggleMessageTone,
+    enableMessageTone,
     connected,
     connectingText,
     closeImage,
@@ -34,7 +35,7 @@ const Header = ({
             >
                 <img src={logo} className="rw-avatar" alt="chat avatar" />
                 <div className="rw-header-buttons">
-                    {
+                    {enableMessageTone && (
                         <button className="rw-toggle-fullscreen-button" onClick={toggleMessageTone}>
                             <img
                                 className={`rw-toggle-fullscreen ${
@@ -46,7 +47,7 @@ const Header = ({
                                 alt="toggle message tone"
                             />
                         </button>
-                    }
+                    )}
                     {showFullScreenButton && (
                         <button className="rw-toggle-fullscreen-button" onClick={toggleFullScreen}>
                             <img
@@ -84,6 +85,7 @@ Header.propTypes = {
     toggleChat: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showFullScreenButton: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     toggleMessageTone: PropTypes.func,
     messageToneMode: PropTypes.bool,
     connected: PropTypes.bool,

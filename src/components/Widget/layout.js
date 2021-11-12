@@ -36,7 +36,7 @@ const WidgetLayout = (props) => {
                     params={props.params}
                     showFullScreenButton={props.showFullScreenButton}
                     toggleMessageTone={props.toggleMessageTone}
-                    playMessageTone={props.playMessageTone}
+                    enableMessageTone={props.enableMessageTone}
                     messageToneMode={props.messageToneMode}
                     {...{ showCloseButton }}
                     connected={props.connected}
@@ -87,7 +87,7 @@ WidgetLayout.propTypes = {
     disabledInput: PropTypes.bool,
     fullScreenMode: PropTypes.bool,
     messageToneMode: PropTypes.bool,
-    playMessageTone: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     toggleMessageTone: PropTypes.func,
     badge: PropTypes.number,
     embedded: PropTypes.bool,

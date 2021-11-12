@@ -132,7 +132,7 @@ const ConnectedWidget = forwardRef((props, ref) => {
                     connectOn={props.connectOn}
                     autoClearCache={props.autoClearCache}
                     fullScreenMode={props.fullScreenMode}
-                    playMessageTone={props.playMessageTone}
+                    enableMessageTone={props.enableMessageTone}
                     messageToneMode={props.messageToneMode}
                     badge={props.badge}
                     embedded={props.embedded}
@@ -178,7 +178,7 @@ ConnectedWidget.propTypes = {
     autoClearCache: PropTypes.bool,
     onSocketEvent: PropTypes.objectOf(PropTypes.func),
     fullScreenMode: PropTypes.bool,
-    playMessageTone: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     messageToneMode: PropTypes.bool,
     badge: PropTypes.number,
     embedded: PropTypes.bool,
@@ -233,7 +233,7 @@ ConnectedWidget.defaultProps = {
     docViewer: false,
     showCloseButton: true,
     showFullScreenButton: true,
-    playMessageTone: false,
+    enableMessageTone: false,
     messageToneMode: false,
     displayUnreadCount: true,
     showMessageDate: true,

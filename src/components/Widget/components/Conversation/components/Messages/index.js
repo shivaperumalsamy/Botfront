@@ -86,7 +86,8 @@ class Messages extends Component {
     };
 
     render() {
-        const { displayTypingIndication, profileAvatar, messageToneMode } = this.props;
+        const { displayTypingIndication, profileAvatar, messageToneMode, enableMessageTone } =
+            this.props;
 
         const renderMessages = () => {
             const { messages, showMessageDate } = this.props;
@@ -117,7 +118,7 @@ class Messages extends Component {
 
             const renderMessage = (message, index) => (
                 <div className={`rw-message ${'rw-with-avatar'}`} key={index}>
-                    {message.get('sender') == 'response' && messageToneMode ? (
+                    {message.get('sender') == 'response' && messageToneMode && enableMessageTone ? (
                         <MessageTone />
                     ) : null}
                     {profileAvatar && message.get('showAvatar') && (
@@ -192,6 +193,7 @@ Messages.propTypes = {
     customComponent: PropTypes.func,
     showMessageDate: PropTypes.bool,
     messageToneMode: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
     displayTypingIndication: PropTypes.bool,
 };
 
