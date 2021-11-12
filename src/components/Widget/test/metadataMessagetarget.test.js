@@ -14,7 +14,12 @@ const store = initStore('dummy', stubSocket, localStorage);
 describe('message target store affect app behavior', () => {
     const launcherCompoment = mount(
         <Provider store={store}>
-            <Launcher toggle={() => {}} isChatOpen={false} fullScreenMode={false} />
+            <Launcher
+                toggle={() => {}}
+                isChatOpen={false}
+                fullScreenMode={false}
+                messageToneMode={false}
+            />
         </Provider>
     );
 

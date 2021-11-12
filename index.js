@@ -121,6 +121,8 @@ export const rasaWebchatProTypes = {
     autoClearCache: PropTypes.bool,
     onSocketEvent: PropTypes.objectOf(PropTypes.func),
     fullScreenMode: PropTypes.bool,
+    playMessageTone: PropTypes.bool,
+    messageToneMode: PropTypes.bool,
     badge: PropTypes.number,
     embedded: PropTypes.bool,
     // eslint-disable-next-line react/forbid-prop-types
@@ -191,9 +193,11 @@ export const rasaWebchatProDefaultTypes = {
     docViewer: true,
     showCloseButton: true,
     showFullScreenButton: false,
+    playMessageTone: false,
+    messageToneMode: false,
     displayUnreadCount: true,
     showMessageDate: true,
-    customMessageDelay: message => {
+    customMessageDelay: (message) => {
         let delay = message.length * 30;
         if (delay > 3 * 1000) delay = 3 * 1000;
         if (delay < 800) delay = 800;

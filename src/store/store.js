@@ -73,6 +73,9 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
             case actionTypes.GET_FULLSCREEN_STATE: {
                 return store.getState().behavior.get('fullScreenMode');
             }
+            case actionTypes.GET_MESSAGETONE_STATE: {
+                return store.getState().behavior.get('messageToneMode');
+            }
             case actionTypes.EVAL_URL: {
                 const pageCallbacks = store.getState().behavior.get('pageChangeCallbacks');
                 const pageCallbacksJs = pageCallbacks ? pageCallbacks.toJS() : {};

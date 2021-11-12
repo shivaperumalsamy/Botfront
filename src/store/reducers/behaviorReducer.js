@@ -3,12 +3,13 @@ import { SESSION_NAME } from 'constants';
 import * as actionTypes from '../actions/actionTypes';
 import { getLocalSession, storeParamsTo } from './helper';
 
-export default function(connectingText, storage, docViewer = false, onWidgetEvent = {}) {
+export default function (connectingText, storage, docViewer = false, onWidgetEvent = {}) {
     const initialState = Map({
         connected: false,
         initialized: false,
         isChatVisible: true,
         isChatOpen: false,
+        toggleMessageTone: false,
         disabledInput: true,
         docViewer,
         connectingText,
@@ -38,7 +39,7 @@ export default function(connectingText, storage, docViewer = false, onWidgetEven
                 }
 
                 return storeParams(
-                    state.update('isChatOpen', isChatOpen => !isChatOpen).set('unreadCount', 0)
+                    state.update('isChatOpen', (isChatOpen) => !isChatOpen).set('unreadCount', 0)
                 );
             }
             case actionTypes.OPEN_CHAT: {
@@ -52,7 +53,13 @@ export default function(connectingText, storage, docViewer = false, onWidgetEven
             case actionTypes.TOGGLE_FULLSCREEN: {
                 if (onWidgetEvent.onChatFullScreen) onWidgetEvent.onChatFullScreen();
                 return storeParams(
-                    state.update('fullScreenMode', fullScreenMode => !fullScreenMode)
+                    state.update('fullScreenMode', (fullScreenMode) => !fullScreenMode)
+                );
+            }
+            case actionTypes.TOGGLE_MESSAGETONE: {
+                if (onWidgetEvent.toggleMessageTone) onWidgetEvent.toggleMessageTone();
+                return storeParams(
+                    state.update('messageToneMode', (messageToneMode) => !messageToneMode)
                 );
             }
             case actionTypes.TOGGLE_INPUT_DISABLED: {
@@ -61,7 +68,9 @@ export default function(connectingText, storage, docViewer = false, onWidgetEven
                     return storeParams(state.update('disabledInput', () => disable));
                 }
 
-                return storeParams(state.update('disabledInput', disabledInput => !disabledInput));
+                return storeParams(
+                    state.update('disabledInput', (disabledInput) => !disabledInput)
+                );
             }
             case actionTypes.CONNECT: {
                 return storeParams(state.set('connected', true).set('disabledInput', false));

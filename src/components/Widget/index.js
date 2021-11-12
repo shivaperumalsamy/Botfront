@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
     toggleFullScreen,
+    toggleMessageTone,
     toggleChat,
     openChat,
     closeChat,
@@ -537,6 +538,10 @@ class Widget extends Component {
         this.props.dispatch(toggleFullScreen());
     }
 
+    toggleMessageTone() {
+        this.props.dispatch(toggleMessageTone());
+    }
+
     dispatchMessage(message) {
         if (Object.keys(message).length === 0) {
             return;
@@ -594,6 +599,7 @@ class Widget extends Component {
             <WidgetLayout
                 toggleChat={() => this.toggleConversation()}
                 toggleFullScreen={() => this.toggleFullScreen()}
+                toggleMessageTone={() => this.toggleMessageTone()}
                 onSendMessage={(event) => this.handleMessageSubmit(event)}
                 title={this.props.title}
                 subtitle={this.props.subtitle}
@@ -603,6 +609,8 @@ class Widget extends Component {
                 showFullScreenButton={this.props.showFullScreenButton}
                 hideWhenNotConnected={this.props.hideWhenNotConnected}
                 fullScreenMode={this.props.fullScreenMode}
+                playMessageTone={this.props.playMessageTone}
+                messageToneMode={this.props.messageToneMode}
                 isChatOpen={this.props.isChatOpen}
                 isChatVisible={this.props.isChatVisible}
                 badge={this.props.badge}
@@ -626,6 +634,7 @@ const mapStateToProps = (state) => ({
     isChatOpen: state.behavior.get('isChatOpen'),
     isChatVisible: state.behavior.get('isChatVisible'),
     fullScreenMode: state.behavior.get('fullScreenMode'),
+    messageToneMode: state.behavior.get('messageToneMode'),
     tooltipSent: state.metadata.get('tooltipSent'),
     oldUrl: state.behavior.get('oldUrl'),
     pageChangeCallbacks: state.behavior.get('pageChangeCallbacks'),
@@ -645,6 +654,8 @@ Widget.propTypes = {
     connectOn: PropTypes.oneOf(['mount', 'open']),
     autoClearCache: PropTypes.bool,
     fullScreenMode: PropTypes.bool,
+    playMessageTone: PropTypes.bool,
+    messageToneMode: PropTypes.bool,
     isChatVisible: PropTypes.bool,
     isChatOpen: PropTypes.bool,
     badge: PropTypes.number,
@@ -676,6 +687,7 @@ Widget.defaultProps = {
     isChatOpen: false,
     isChatVisible: true,
     fullScreenMode: false,
+    messageToneMode: false,
     connectOn: 'mount',
     autoClearCache: false,
     displayUnreadCount: true,
