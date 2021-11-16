@@ -1,27 +1,18 @@
 import { post } from './fetch';
 
-const testToken =
-    'QBqa5nInszTruDUQayoEokoF08jW%2FnK6YhM55BahiyQRO2NkM6oSlvIBC%2Bio6iCznxH11lucohTirWN4FbU6PeYqOIRd4PNeDXuhk%2FXNDpN4C1o9p88saGEu%2BctB%2Bhh6Fjdgw60AyudMD8Kl45JUNR%2BCOMIfyyJ4yIOBqCcuGtlSXyw2kjM2NfH48TIEQVEh05POk7Z3IMHaDOHiSWs05pqVJxPVL2Sq5FX4jZ97hZ3XFwzEd9gHJn5d0v3nfFShv29Pf7wRZLtM0ERZr9sMJAcUK6h3Eo2Rrwd09Oh2iNKXPRGwTQV%2BhA%3D%3D';
+const AUTH_URL = 'http://localhost:8080/api/authenticate';
 
 export function emitMsg(socket, customData, payload, sessionId) {
-    if (customData.auth.url.length > 0) {
-        post(customData.auth.url, {
-            userId: customData.auth.parameters.userId,
-            userName: customData.auth.parameters.userName,
-        }).then((response) => {
-            customData.auth['token'] = response.token || testToken;
-            socket.emit('user_uttered', {
-                message: payload,
-                customData,
-                session_id: sessionId,
-            });
-        });
-    } else {
-        customData.auth['token'] = testToken;
+    post(AUTH_URL, {
+        userId: customData.user.id,
+        userFullName: customData.user.name,
+    }).then((response) => {
+        customData['token'] = response.token;
+        sessionStorage.setItem('TOKEN', response.token);
         socket.emit('user_uttered', {
             message: payload,
             customData,
             session_id: sessionId,
         });
-    }
+    });
 }

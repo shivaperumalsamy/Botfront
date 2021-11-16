@@ -89,11 +89,11 @@ In your `<body/>`:
     {
     	customData: {
     		language: "en",
-    		auth: {
-    			"url": "", // MyCase REST URL to get the token
-                "parameters": "" // Required parameters for REST URRL
+    		user: {
+                "id": "", // Sender Id
+                "name": "" // Sender Fullname
     		},
-    		accessToken: "",
+    		token: "", // JWT Token
     	}
     }
 </script>
