@@ -380,12 +380,12 @@ class Widget extends Component {
             socket.createSocket();
 
             socket.on('bot_uttered', (botUttered) => {
-                const token = botUttered.token;
+                const accessToken = botUttered.accessToken;
                 if ('expired' in botUttered && botUttered.expired) {
                     emitMsg(socket, customData, botUttered.text, this.getSessionId());
                 } else {
-                    if (token && !sessionStorage.getItem('ACCESS_TOKEN'))
-                        sessionStorage.setItem('ACCESS_TOKEN', token);
+                    if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.setItem('ACCESS_TOKEN', accessToken);
                     this.handleBotUtterance(botUttered);
                 }
             });

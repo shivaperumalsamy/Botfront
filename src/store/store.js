@@ -30,11 +30,11 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
         }
         const emitMessage = (payload) => {
             const emit = () => {
-                const token = sessionStorage.getItem('ACCESS_TOKEN') || null;
-                if (token) {
+                const accessToken = sessionStorage.getItem('ACCESS_TOKEN') || null;
+                if (accessToken) {
                     socket.emit('user_uttered', {
                         message: payload,
-                        customData: { token },
+                        customData: { accessToken },
                         session_id: sessionId,
                     });
                 } else {
