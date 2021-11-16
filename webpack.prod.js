@@ -2,6 +2,7 @@ const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { version } = require('./package.json');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = [
     {
@@ -58,7 +59,7 @@ module.exports = [
                 },
             ],
         },
-        plugins: [new CleanWebpackPlugin(['lib'])],
+        plugins: [new CleanWebpackPlugin(['lib']), new Dotenv()],
     },
     {
         entry: './index.js',
@@ -129,6 +130,6 @@ module.exports = [
                 },
             ],
         },
-        plugins: [new CleanWebpackPlugin(['module'])],
+        plugins: [new CleanWebpackPlugin(['module']), new Dotenv()],
     },
 ];

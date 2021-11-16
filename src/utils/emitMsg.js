@@ -1,9 +1,7 @@
 import { post } from './fetch';
 
-const AUTH_URL = 'http://localhost:8080/api/authenticate';
-
 export function emitMsg(socket, customData, payload, sessionId) {
-    post(AUTH_URL, {
+    post(process.env.AUTH_URL, {
         userId: customData.user.id,
         userFullName: customData.user.name,
     }).then((response) => {
