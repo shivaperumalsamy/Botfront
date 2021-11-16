@@ -5,8 +5,8 @@ export function emitMsg(socket, customData, payload, sessionId) {
         userId: customData.user.id,
         userFullName: customData.user.name,
     }).then((response) => {
-        customData['token'] = response.token;
-        sessionStorage.setItem('TOKEN', response.token);
+        customData['token'] = response.accessToken;
+        sessionStorage.setItem('TOKEN', response.accessToken);
         socket.emit('user_uttered', {
             message: payload,
             customData,
