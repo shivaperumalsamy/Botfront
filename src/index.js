@@ -214,7 +214,7 @@ ConnectedWidget.defaultProps = {
     title: 'Courtie',
     subtitle: '',
     customData: {},
-    inputTextFieldHint: 'Message here...',
+    inputTextFieldHint: 'Message Courtie',
     connectingText: 'Waiting for server...',
     fullScreenMode: false,
     hideWhenNotConnected: true,

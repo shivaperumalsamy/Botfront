@@ -384,8 +384,8 @@ class Widget extends Component {
                 if ('expired' in botUttered && botUttered.expired) {
                     emitMsg(socket, customData, botUttered.text, this.getSessionId());
                 } else {
-                    if (token && !sessionStorage.getItem('TOKEN'))
-                        sessionStorage.setItem('TOKEN', token);
+                    if (token && !sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.setItem('ACCESS_TOKEN', token);
                     this.handleBotUtterance(botUttered);
                 }
             });

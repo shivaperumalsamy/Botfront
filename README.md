@@ -90,10 +90,10 @@ In your `<body/>`:
     	customData: {
     		language: "en",
     		user: {
-                "id": "", // Sender Id
-                "name": "" // Sender Fullname
-    		},
-    		token: "", // JWT Token
+                "id": "",
+                "name": ""
+    		}, // Sender Details
+            authUrl: '' // Courtie REST API Endpoint
     	}
     }
 </script>

@@ -3,6 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { version } = require('./package.json');
 const Dotenv = require('dotenv-webpack');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 module.exports = {
     // entry: ['babel-polyfill', './index.js'],
     entry: './umd.js',
