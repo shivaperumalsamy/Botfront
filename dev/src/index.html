@@ -3,7 +3,7 @@
     <head>
         <title>Botfront - Web Chat</title>
         <script>
-            !(function() {
+            !(function () {
                 let e = document.createElement('script'),
                     t = document.head || document.getElementsByTagName('head')[0];
                 (e.src = 'index.js'),
@@ -14,10 +14,9 @@
                                 initPayload: '',
                                 customData: {
                                     language: 'en',
-                                    auth: {
-                                        url: '',
-                                        parameters: { userId: '44', userName: 'MONEY 4 YOU' },
-                                    },
+                                    user: { id: '36', name: 'Marshall Mathers' }, // Sender Details
+                                    accessToken: null, // for JWT Token
+                                    authUrl: 'http://localhost:8080/api/authenticate', // For testing, Replace with your own REST API endpoint
                                 },
                                 socketUrl: 'http://localhost:5005/',
                             },

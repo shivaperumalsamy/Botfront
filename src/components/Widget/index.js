@@ -374,15 +374,20 @@ class Widget extends Component {
             connectOn,
             tooltipPayload,
             tooltipDelay,
+            customData,
         } = this.props;
         if (!socket.isInitialized()) {
             socket.createSocket();
 
             socket.on('bot_uttered', (botUttered) => {
                 const accessToken = botUttered.accessToken;
-                if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
-                    sessionStorage.setItem('ACCESS_TOKEN', accessToken);
-                this.handleBotUtterance(botUttered);
+                if ('expired' in botUttered && botUttered.expired) {
+                    emitMsg(socket, customData, botUttered.text, this.getSessionId());
+                } else {
+                    if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.setItem('ACCESS_TOKEN', accessToken);
+                    this.handleBotUtterance(botUttered);
+                }
             });
 
             this.checkVersionBeforePull();

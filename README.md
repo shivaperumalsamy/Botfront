@@ -89,11 +89,11 @@ In your `<body/>`:
     {
     	customData: {
     		language: "en",
-    		auth: {
-    			"url": "", // MyCase REST URL to get the token
-                "parameters": "" // Required parameters for REST URRL
-    		},
-    		accessToken: "",
+    		user: {
+                "id": "",
+                "name": ""
+    		}, // Sender Details
+            authUrl: '' // Courtie REST API Endpoint
     	}
     }
 </script>
