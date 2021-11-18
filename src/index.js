@@ -132,6 +132,8 @@ const ConnectedWidget = forwardRef((props, ref) => {
                     connectOn={props.connectOn}
                     autoClearCache={props.autoClearCache}
                     fullScreenMode={props.fullScreenMode}
+                    enableMessageTone={props.enableMessageTone}
+                    messageToneMode={props.messageToneMode}
                     badge={props.badge}
                     embedded={props.embedded}
                     params={props.params}
@@ -176,6 +178,8 @@ ConnectedWidget.propTypes = {
     autoClearCache: PropTypes.bool,
     onSocketEvent: PropTypes.objectOf(PropTypes.func),
     fullScreenMode: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
+    messageToneMode: PropTypes.bool,
     badge: PropTypes.number,
     embedded: PropTypes.bool,
     // eslint-disable-next-line react/forbid-prop-types
@@ -229,6 +233,8 @@ ConnectedWidget.defaultProps = {
     docViewer: false,
     showCloseButton: true,
     showFullScreenButton: true,
+    enableMessageTone: false,
+    messageToneMode: false,
     displayUnreadCount: true,
     showMessageDate: true,
     customMessageDelay: (message) => {

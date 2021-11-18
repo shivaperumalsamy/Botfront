@@ -26,6 +26,7 @@ const Launcher = ({
     isChatOpen,
     badge,
     fullScreenMode,
+    messageToneMode,
     openLauncherImage,
     closeImage,
     unreadCount,
@@ -42,7 +43,7 @@ const Launcher = ({
     const [referenceElement, setReferenceElement] = useState(null);
 
     useEffect(() => {
-        const setReference = selector => {
+        const setReference = (selector) => {
             const reference = safeQuerySelectorAll(selector);
             if (reference && reference.length === 1) {
                 onRemove(reference[0], () => setReferenceElement(null));
@@ -124,18 +125,18 @@ const Launcher = ({
         toggle(); // open the chat if the tooltip do not know how to display the compoment
     };
 
-    const renderSequenceTooltip = lastMessagesSeq => (
-        <div className="rw-slider-safe-zone" onClick={e => e.stopPropagation()}>
+    const renderSequenceTooltip = (lastMessagesSeq) => (
+        <div className="rw-slider-safe-zone" onClick={(e) => e.stopPropagation()}>
             <Slider {...sliderSettings}>
-                {lastMessagesSeq.map(message => (
+                {lastMessagesSeq.map((message) => (
                     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
                     <div
                         className="rw-tooltip-response"
-                        onMouseDown={event => {
+                        onMouseDown={(event) => {
                             dragStatus.current.x = event.clientX;
                             dragStatus.current.y = event.clientY;
                         }}
-                        onMouseUp={event => {
+                        onMouseUp={(event) => {
                             if (
                                 Math.abs(dragStatus.current.x - event.clientX) +
                                     Math.abs(dragStatus.current.y - event.clientY) <
@@ -155,7 +156,7 @@ const Launcher = ({
         <React.Fragment>
             <div className="rw-tooltip-close">
                 <button
-                    onClick={e => {
+                    onClick={(e) => {
                         /* stop the propagation because the popup is also a button
             otherwise it would open the webchat when closing the tooltip */
                         e.stopPropagation();
@@ -199,7 +200,7 @@ const Launcher = ({
         <div
             className="rw-tooltip-body"
             style={{ backgroundColor: assistBackgoundColor }}
-            onClick={e => {
+            onClick={(e) => {
                 e.stopPropagation();
             }}
         >
@@ -250,6 +251,7 @@ Launcher.propTypes = {
     isChatOpen: PropTypes.bool,
     badge: PropTypes.number,
     fullScreenMode: PropTypes.bool,
+    messageToneMode: PropTypes.bool,
     openLauncherImage: PropTypes.string,
     closeImage: PropTypes.string,
     unreadCount: PropTypes.number,
@@ -260,7 +262,7 @@ Launcher.propTypes = {
     lastMessages: PropTypes.arrayOf(ImmutablePropTypes.map),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     lastMessages:
         (state.messages &&
             (() => {
@@ -297,9 +299,9 @@ const mapStateToProps = state => ({
     domHighlight: state.metadata.get('domHighlight'),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     closeTooltip: () => dispatch(showTooltipAction(false)),
-    sendPayload: payload => dispatch(emitUserMessage(payload)),
+    sendPayload: (payload) => dispatch(emitUserMessage(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Launcher);

@@ -6,7 +6,7 @@ import Messages from './components/Messages';
 import Sender from './components/Sender';
 import './style.scss';
 
-const Conversation = props => (
+const Conversation = (props) => (
     <div className="rw-conversation-container">
         <Header
             title={props.title}
@@ -16,6 +16,9 @@ const Conversation = props => (
             fullScreenMode={props.fullScreenMode}
             showCloseButton={props.showCloseButton}
             showFullScreenButton={props.showFullScreenButton}
+            enableMessageTone={props.enableMessageTone}
+            messageToneMode={props.messageToneMode}
+            toggleMessageTone={props.toggleMessageTone}
             connected={props.connected}
             connectingText={props.connectingText}
             closeImage={props.closeImage}
@@ -26,6 +29,9 @@ const Conversation = props => (
             params={props.params}
             customComponent={props.customComponent}
             showMessageDate={props.showMessageDate}
+            toggleMessageTone={props.toggleMessageTone}
+            messageToneMode={props.messageToneMode}
+            enableMessageTone={props.enableMessageTone}
         />
         <Sender
             sendMessage={props.sendMessage}
@@ -45,6 +51,9 @@ Conversation.propTypes = {
     toggleChat: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showFullScreenButton: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
+    toggleMessageTone: PropTypes.func,
+    messageToneMode: PropTypes.bool,
     disabledInput: PropTypes.bool,
     inputTextFieldHint: PropTypes.string,
     params: PropTypes.object,

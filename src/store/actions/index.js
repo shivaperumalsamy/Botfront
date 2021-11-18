@@ -66,6 +66,12 @@ export function toggleFullScreen() {
     };
 }
 
+export function toggleMessageTone() {
+    return {
+        type: actions.TOGGLE_MESSAGETONE,
+    };
+}
+
 export function toggleInputDisabled(disable) {
     return {
         type: actions.TOGGLE_INPUT_DISABLED,

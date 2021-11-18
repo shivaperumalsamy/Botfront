@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import close from 'assets/clear-button.svg';
 import fullscreen from 'assets/fullscreen_button.svg';
 import fullscreenExit from 'assets/fullscreen_exit_button.svg';
+import unmuteTone from 'assets/unmute-tone.png';
+import muteTone from 'assets/mute-tone.png';
 import logo from 'assets/state_of_utah.png';
 import './style.scss';
 import ThemeContext from '../../../../ThemeContext';
@@ -16,6 +18,9 @@ const Header = ({
     toggleChat,
     showCloseButton,
     showFullScreenButton,
+    messageToneMode,
+    toggleMessageTone,
+    enableMessageTone,
     connected,
     connectingText,
     closeImage,
@@ -30,6 +35,19 @@ const Header = ({
             >
                 <img src={logo} className="rw-avatar" alt="chat avatar" />
                 <div className="rw-header-buttons">
+                    {enableMessageTone && (
+                        <button className="rw-toggle-fullscreen-button" onClick={toggleMessageTone}>
+                            <img
+                                className={`rw-toggle-fullscreen ${
+                                    messageToneMode
+                                        ? 'rw-fullScreenExitImage'
+                                        : 'rw-fullScreenImage'
+                                }`}
+                                src={messageToneMode ? unmuteTone : muteTone}
+                                alt="toggle message tone"
+                            />
+                        </button>
+                    )}
                     {showFullScreenButton && (
                         <button className="rw-toggle-fullscreen-button" onClick={toggleFullScreen}>
                             <img
@@ -67,6 +85,9 @@ Header.propTypes = {
     toggleChat: PropTypes.func,
     showCloseButton: PropTypes.bool,
     showFullScreenButton: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
+    toggleMessageTone: PropTypes.func,
+    messageToneMode: PropTypes.bool,
     connected: PropTypes.bool,
     connectingText: PropTypes.string,
     closeImage: PropTypes.string,

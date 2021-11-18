@@ -6,7 +6,7 @@ import Conversation from './components/Conversation';
 import Launcher from './components/Launcher';
 import './style.scss';
 
-const WidgetLayout = props => {
+const WidgetLayout = (props) => {
     const classes = props.embedded ? ['rw-widget-embedded'] : ['rw-widget-container'];
     if (props.fullScreenMode) {
         classes.push('rw-full-screen');
@@ -35,6 +35,9 @@ const WidgetLayout = props => {
                     disabledInput={props.disabledInput}
                     params={props.params}
                     showFullScreenButton={props.showFullScreenButton}
+                    toggleMessageTone={props.toggleMessageTone}
+                    enableMessageTone={props.enableMessageTone}
+                    messageToneMode={props.messageToneMode}
                     {...{ showCloseButton }}
                     connected={props.connected}
                     connectingText={props.connectingText}
@@ -50,6 +53,7 @@ const WidgetLayout = props => {
                     isChatOpen={props.isChatOpen}
                     badge={props.badge}
                     fullScreenMode={props.fullScreenMode}
+                    messageToneMode={props.messageToneMode}
                     openLauncherImage={props.openLauncherImage}
                     closeImage={props.closeImage}
                     displayUnreadCount={props.displayUnreadCount}
@@ -60,7 +64,7 @@ const WidgetLayout = props => {
     ) : null;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     isChatVisible: state.behavior.get('isChatVisible'),
     isChatOpen: state.behavior.get('isChatOpen'),
     disabledInput: state.behavior.get('disabledInput'),
@@ -82,6 +86,9 @@ WidgetLayout.propTypes = {
     hideWhenNotConnected: PropTypes.bool,
     disabledInput: PropTypes.bool,
     fullScreenMode: PropTypes.bool,
+    messageToneMode: PropTypes.bool,
+    enableMessageTone: PropTypes.bool,
+    toggleMessageTone: PropTypes.func,
     badge: PropTypes.number,
     embedded: PropTypes.bool,
     inputTextFieldHint: PropTypes.string,

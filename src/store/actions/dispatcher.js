@@ -89,6 +89,10 @@ export function toggleFullScreen() {
     store.dispatch(actions.toggleFullScreen());
 }
 
+export function toggleMessageTone() {
+    store.dispatch(actions.toggleMessageTone());
+}
+
 export function toggleInputDisabled(disable) {
     store.dispatch(actions.toggleInputDisabled(disable));
 }
