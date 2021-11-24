@@ -6,6 +6,6 @@ COPY package.json .
 
 COPY lib/index.js /app/lib/index.js
 
-RUN npm install http-server
+COPY lib/index.html /app/lib/index.html
 
-ENTRYPOINT [ "npm" ]
+RUN npm install http-server

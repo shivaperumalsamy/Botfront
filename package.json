@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "webpack-dev-server --config webpack.dev.js",
         "build": "webpack --config webpack.prod.js -p",
-        "prod": "http-server lib/",
+        "prod": "http-server -p 9080 lib/",
         "test": "jest",
         "prepare": "npm run build",
         "release": "standard-version"
