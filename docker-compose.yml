@@ -2,11 +2,10 @@ version: '3.8'
 
 services:
     botfront:
-        image: sivasirius/utcourt-botfront:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: utcourtchatbotregistry.azurecr.io/utcourt-botfront:latest
         container_name: botfront
         ports:
             - 9080:9080
-        command:
-            - npm
-            - run
-            - prod
