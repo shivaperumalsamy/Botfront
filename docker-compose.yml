@@ -4,12 +4,8 @@ services:
     botfront:
         build:
             context: .
-            dockerfile: Dockerfile_local
+            dockerfile: Dockerfile
         image: utcourtchatbotregistry.azurecr.io/utcourt-botfront:latest
         container_name: botfront
         ports:
             - 9080:9080
-        command:
-            - npm
-            - run
-            - prod
