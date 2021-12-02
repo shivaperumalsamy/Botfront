@@ -8,4 +8,4 @@ services:
         image: utcourtchatbotregistry.azurecr.io/utcourt-botfront:latest
         container_name: botfront
         ports:
-            - 9080:9080
+            - 80:80
