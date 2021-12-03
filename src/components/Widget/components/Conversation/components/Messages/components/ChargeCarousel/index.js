@@ -74,7 +74,7 @@ const ChargeCarousel = (props) => {
                             <div className="rw-carousel-card-title">🚩 {carouselCard.severity}</div>
                             <div className="rw-carousel-card-subtitle">{'Offense Date'}</div>
                             <div className="rw-carousel-card-title">
-                                📅 {carouselCard.offense_date}
+                                📅 {carouselCard.violation_date}
                             </div>
                         </div>
                     );
