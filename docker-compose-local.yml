@@ -12,4 +12,4 @@ services:
         command:
             - npm
             - run
-            - prod
+            - test

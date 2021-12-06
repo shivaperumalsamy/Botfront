@@ -54,6 +54,56 @@ $ python3 -m http.server PORT_NUMBER
 
 ---
 
+## Using Docker
+
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.
+
+### To build the images:
+
+For development:
+
+```
+docker-compose -f docker-compose-local.yml build
+```
+
+For production:
+
+```
+docker-compose build
+```
+
+### To spin up containers from the images use:
+
+For development:
+
+```
+docker-compose -f docker-compose-local.yml up
+```
+
+### To push the images to the repository:
+
+Before pushing make sure to login to the account that contains the repository. To login use:
+
+```
+docker login <account_name>
+```
+
+The user will be prompted for the username and password.
+
+For development:
+
+```
+docker-compose -f docker-compose-local.yml push
+```
+
+For production:
+
+```
+docker-compose push
+```
+
+---
+
 ## Usage
 
 ### In a `<script>` tag
