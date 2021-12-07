@@ -80,34 +80,36 @@ const ChargeCarousel = (props) => {
                     );
                 })}
             </div>
-            <div className="rw-carousel-arrows-container">
-                {leftButton && (
-                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                    <div
-                        className="rw-left-arrow rw-carousel-arrow"
-                        onClick={handleLeftArrow}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="rw-arrow" alt="left carousel arrow">
-                            <Arrow />
+            {carousel.elements.length > 1 && (
+                <div className="rw-carousel-arrows-container">
+                    {leftButton && (
+                        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                        <div
+                            className="rw-left-arrow rw-carousel-arrow"
+                            onClick={handleLeftArrow}
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <div className="rw-arrow" alt="left carousel arrow">
+                                <Arrow />
+                            </div>
                         </div>
-                    </div>
-                )}
-                {rightButton && (
-                    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-                    <div
-                        className="rw-right-arrow rw-carousel-arrow"
-                        onClick={handleRightArrow}
-                        role="button"
-                        tabIndex={0}
-                    >
-                        <div className="rw-arrow" alt="right carousel arrow">
-                            <Arrow />
+                    )}
+                    {rightButton && (
+                        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+                        <div
+                            className="rw-right-arrow rw-carousel-arrow"
+                            onClick={handleRightArrow}
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <div className="rw-arrow" alt="right carousel arrow">
+                                <Arrow />
+                            </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+                </div>
+            )}
         </React.Fragment>
     );
 };
