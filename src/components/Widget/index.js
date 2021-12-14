@@ -523,7 +523,6 @@ class Widget extends Component {
             this.dispatchMessage(this.delayedMessage);
             dispatch(newUnreadMessage());
             this.onGoingMessageDelay = false;
-            dispatch(triggerMessageDelayed(false));
             this.messages.forEach((message) => {
                 this.dispatchMessage(message);
                 dispatch(newUnreadMessage());
@@ -535,6 +534,7 @@ class Widget extends Component {
         } else {
             this.props.dispatch(showTooltip(false));
         }
+        dispatch(triggerMessageDelayed(false));
         clearTimeout(this.tooltipTimeout);
         dispatch(toggleChat());
     }
