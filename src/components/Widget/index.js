@@ -13,7 +13,7 @@ import {
     emitUserMessage,
     addResponseMessage,
     addCarousel,
-    addChargeCarousel,
+    addCustomCarousel,
     addVideoSnippet,
     addImageSnippet,
     addButtons,
@@ -38,7 +38,7 @@ import {
 import { safeQuerySelectorAll } from 'utils/dom';
 import { emitMsg } from 'utils/emitMsg';
 import { SESSION_NAME, NEXT_MESSAGE } from 'constants';
-import { isVideo, isImage, isButtons, isText, isCarousel, isChargeCarousel } from './msgProcessor';
+import { isVideo, isImage, isButtons, isText, isCarousel, isCustomCarousel } from './msgProcessor';
 import WidgetLayout from './layout';
 import { storeLocalSession, getLocalSession } from '../../store/reducers/helper';
 
@@ -557,8 +557,8 @@ class Widget extends Component {
             this.props.dispatch(addButtons(messageClean));
         } else if (isText(messageClean)) {
             this.props.dispatch(addResponseMessage(messageClean.text));
-        } else if (isChargeCarousel(messageClean)) {
-            this.props.dispatch(addChargeCarousel(messageClean));
+        } else if (isCustomCarousel(messageClean)) {
+            this.props.dispatch(addCustomCarousel(messageClean));
         } else if (isCarousel(messageClean)) {
             this.props.dispatch(addCarousel(messageClean));
         } else if (isVideo(messageClean)) {

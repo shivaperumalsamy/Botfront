@@ -1,15 +1,13 @@
-import React, { useRef, useState, useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import { addUserMessage, emitUserMessage } from 'actions';
-import { PROP_TYPES } from 'constants';
 import Arrow from 'assets/arrow';
+import { PROP_TYPES } from 'constants';
+import PropTypes from 'prop-types';
+import React, { useContext, useRef, useState } from 'react';
+import { connect } from 'react-redux';
 import ThemeContext from '../../../../../../ThemeContext';
-
 import './styles.scss';
 
-const ChargeCarousel = (props) => {
+const CustomCarousel = (props) => {
     const carousel = props.message.toJS();
     const handleClick = (action) => {
         if (!action || action.type !== 'postback') return;
@@ -50,6 +48,32 @@ const ChargeCarousel = (props) => {
         });
     };
 
+    const toPascalCase = (string) => {
+        return string.replace(/\w+/g, function (w) {
+            return w[0].toUpperCase() + w.slice(1).toLowerCase();
+        });
+    };
+
+    const populateCard = (cardObj) => {
+        let elements = [];
+        for (var key in cardObj) {
+            if (cardObj.hasOwnProperty(key)) {
+                var value = cardObj[key];
+                elements.push(
+                    <div className="rw-carousel-card-subtitle" key={key}>
+                        {toPascalCase(key)}
+                    </div>
+                );
+                elements.push(
+                    <div className="rw-carousel-card-title" key={key + value}>
+                        {value}
+                    </div>
+                );
+            }
+        }
+        return elements;
+    };
+
     const { linkTarget } = props;
 
     return (
@@ -59,23 +83,12 @@ const ChargeCarousel = (props) => {
                 ref={scrollContainer}
                 onScroll={() => handleScroll()}
             >
-                {carousel.elements.map((carouselCard, index) => {
+                {carousel.elements.map((element, index) => {
                     return (
                         <div className="rw-carousel-card" key={index}>
-                            <div className="rw-carousel-card-subtitle">
-                                🔖 {'Case Offense Details'}
-                            </div>
+                            <div className="rw-carousel-card-subtitle">{carousel.title}</div>
                             <div className="rw-hr-line"> </div>
-                            <div className="rw-carousel-card-subtitle">{'Sequence'}</div>
-                            <div className="rw-carousel-card-title">#️⃣ {carouselCard.sequence}</div>
-                            <div className="rw-carousel-card-subtitle">{'Offense'}</div>
-                            <div className="rw-carousel-card-title">{carouselCard.offense}</div>
-                            <div className="rw-carousel-card-subtitle">{'Severity'}</div>
-                            <div className="rw-carousel-card-title">🚩 {carouselCard.severity}</div>
-                            <div className="rw-carousel-card-subtitle">{'Offense Date'}</div>
-                            <div className="rw-carousel-card-title">
-                                📅 {carouselCard.violation_date}
-                            </div>
+                            {populateCard(element)}
                         </div>
                     );
                 })}
@@ -114,8 +127,8 @@ const ChargeCarousel = (props) => {
     );
 };
 
-ChargeCarousel.propTypes = {
-    message: PROP_TYPES.CHARGECAROUSEL,
+CustomCarousel.propTypes = {
+    message: PROP_TYPES.CUSTOM_CAROUSEL,
     // completely bugged, it's actually used in handle click
     // eslint-disable-next-line react/no-unused-prop-types
     chooseReply: PropTypes.func.isRequired,
@@ -133,4 +146,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChargeCarousel);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomCarousel);

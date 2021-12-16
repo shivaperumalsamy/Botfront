@@ -1,22 +1,21 @@
-import React from 'react';
 import { shallow } from 'enzyme';
-import { Provider } from 'react-redux';
-
-import { createChargeCarousel } from 'helper';
+import { createCustomCarousel } from 'helper';
 import { List } from 'immutable';
-
-import Messages from '../../index';
-import { initStore } from '../../../../../../../../store/store';
+import React from 'react';
+import { Provider } from 'react-redux';
 import LocalStorageMock from '../../../../../../../../../mocks/localStorageMock';
+import { initStore } from '../../../../../../../../store/store';
+import Messages from '../../index';
 
-describe('</ChargeCarousel />', () => {
-    const carousel = createChargeCarousel(
+describe('</CustomCarousel />', () => {
+    const carousel = createCustomCarousel(
         {
             attachment: {
                 type: 'template',
                 payload: {
                     template_type: 'generic',
-                    name: 'chargecard',
+                    name: 'custom_carousel',
+                    title: 'Case Offense Details',
                     elements: [
                         {
                             sequence: '1',

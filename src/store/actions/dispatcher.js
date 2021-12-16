@@ -37,8 +37,8 @@ export function addCarousel(carousel) {
     store.dispatch(actions.addCarousel(carousel));
 }
 
-export function addChargeCarousel(carousel) {
-    store.dispatch(actions.addChargeCarousel(carousel));
+export function addCustomCarousel(carousel) {
+    store.dispatch(actions.addCustomCarousel(carousel));
 }
 
 export function addVideoSnippet(video) {

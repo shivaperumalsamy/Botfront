@@ -11,7 +11,7 @@ export const MESSAGE_SENDER = {
 export const MESSAGES_TYPES = {
     TEXT: 'text',
     CAROUSEL: 'carousel',
-    CHARGECAROUSEL: 'charge-carousel',
+    CUSTOM_CAROUSEL: 'custom_carousel',
     VIDREPLY: {
         VIDEO: 'vidreply',
     },
@@ -39,6 +39,7 @@ export const PROP_TYPES = {
             MESSAGES_TYPES.TEXT,
             MESSAGES_TYPES.BUTTONS,
             MESSAGES_TYPES.CAROUSEL,
+            MESSAGES_TYPES.CUSTOM_CAROUSEL,
             MESSAGES_TYPES.IMGREPLY.IMAGE,
             MESSAGES_TYPES.VIDREPLY.VIDEO,
         ]),
@@ -61,16 +62,8 @@ export const PROP_TYPES = {
         sender: senderType,
     }),
 
-    CHARGECAROUSEL: ImmutablePropTypes.contains({
+    CUSTOM_CAROUSEL: ImmutablePropTypes.contains({
         id: PropTypes.number,
-        elements: ImmutablePropTypes.listOf(
-            ImmutablePropTypes.mapContains({
-                sequence: PropTypes.number,
-                offense: PropTypes.string,
-                severity: PropTypes.string,
-                offense_date: PropTypes.string,
-            })
-        ),
         sender: senderType,
     }),
 

@@ -5,7 +5,7 @@ import {
     createButtons,
     createNewMessage,
     createCarousel,
-    createChargeCarousel,
+    createCustomCarousel,
     createVideoSnippet,
     createImageSnippet,
     createComponentMessage,
@@ -47,9 +47,9 @@ export default function (storage) {
                     state.push(createCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
                 );
             }
-            case actionTypes.ADD_CHARGECAROUSEL: {
+            case actionTypes.ADD_CUSTOM_CAROUSEL: {
                 return storeMessage(
-                    state.push(createChargeCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
+                    state.push(createCustomCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
                 );
             }
             case actionTypes.ADD_NEW_VIDEO_VIDREPLY: {

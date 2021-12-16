@@ -109,9 +109,9 @@ export function addCarousel(carousel) {
     };
 }
 
-export function addChargeCarousel(carousel) {
+export function addCustomCarousel(carousel) {
     return {
-        type: actions.ADD_CHARGECAROUSEL,
+        type: actions.ADD_CUSTOM_CAROUSEL,
         carousel,
     };
 }

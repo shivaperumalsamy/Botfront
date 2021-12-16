@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
 import { MESSAGES_TYPES } from 'constants';
-import { Video, Image, Message, Carousel, ChargeCarousel, Buttons } from 'messagesComponents';
+import { Video, Image, Message, Carousel, CustomCarousel, Buttons } from 'messagesComponents';
 
 import './styles.scss';
 import ThemeContext from '../../../../ThemeContext';
@@ -51,8 +51,8 @@ class Messages extends Component {
                 case MESSAGES_TYPES.CAROUSEL: {
                     return Carousel;
                 }
-                case MESSAGES_TYPES.CHARGECAROUSEL: {
-                    return ChargeCarousel;
+                case MESSAGES_TYPES.CUSTOM_CAROUSEL: {
+                    return CustomCarousel;
                 }
                 case MESSAGES_TYPES.VIDREPLY.VIDEO: {
                     return Video;
