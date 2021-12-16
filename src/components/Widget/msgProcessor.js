@@ -11,7 +11,7 @@ export function isCarousel(message) {
     );
 }
 
-export function isChargeCarousel(message) {
+export function isCustomCarousel(message) {
     return (
         Object.keys(message).includes('attachment') &&
         Object.keys(message.attachment).includes('type') &&
@@ -19,7 +19,7 @@ export function isChargeCarousel(message) {
         Object.keys(message.attachment).includes('payload') &&
         Object.keys(message.attachment.payload).indexOf('template_type') >= 0 &&
         message.attachment.payload.template_type === 'generic' &&
-        message.attachment.payload.name === 'chargecard' &&
+        message.attachment.payload.name === 'custom_carousel' &&
         Object.keys(message.attachment.payload).indexOf('elements') >= 0 &&
         message.attachment.payload.elements.length > 0
     );

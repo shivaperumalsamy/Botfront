@@ -1,7 +1,6 @@
-import { Map, fromJS } from 'immutable';
 import { MESSAGES_TYPES, MESSAGE_SENDER, SESSION_NAME } from 'constants';
-
-import { Video, Image, Message, Carousel, ChargeCarousel, Buttons } from 'messagesComponents';
+import { fromJS, Map } from 'immutable';
+import { Buttons, Carousel, CustomCarousel, Image, Message, Video } from 'messagesComponents';
 
 export function createNewMessage(text, sender, nextMessageIsTooltip, hidden) {
     return Map({
@@ -26,11 +25,12 @@ export function createCarousel(carousel, sender) {
     });
 }
 
-export function createChargeCarousel(carousel, sender) {
+export function createCustomCarousel(carousel, sender) {
     return Map({
-        type: MESSAGES_TYPES.CHARGECAROUSEL,
-        component: ChargeCarousel,
+        type: MESSAGES_TYPES.CUSTOM_CAROUSEL,
+        component: CustomCarousel,
         sender,
+        title: fromJS(carousel.attachment.payload.title),
         elements: fromJS(carousel.attachment.payload.elements),
         timestamp: new Date().getTime(),
     });
