@@ -34,8 +34,9 @@ export function isCustomCard(message) {
         Object.keys(message.attachment.payload).indexOf('template_type') >= 0 &&
         message.attachment.payload.template_type === 'generic' &&
         message.attachment.payload.name === 'payment_form' &&
-        Object.keys(message.attachment.payload).indexOf('elements') >= 0 &&
-        message.attachment.payload.elements.length > 0
+        message.attachment.payload.isForm &&
+        Object.keys(message.attachment.payload.form).indexOf('elements') >= 0 &&
+        message.attachment.payload.form.elements.length > 0
     );
 }
 
