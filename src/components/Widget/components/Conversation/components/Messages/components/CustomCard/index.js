@@ -59,16 +59,18 @@ const CustomCard = (props) => {
                         {customCard.form.elements.map((element, index) => {
                             return <>{populateElement(element, index)}</>;
                         })}
+                        <a
+                            className="rw-custom-card-subtitle"
+                            href={customCard.form.action}
+                            target={linkTarget || '_blank'}
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                                document.getElementById(`${customCard.form.id}`).submit()
+                            }
+                        >
+                            {customCard.form.link_title}
+                        </a>
                     </form>
-                    <a
-                        className="rw-custom-card-subtitle"
-                        href={customCard.form.action}
-                        target={linkTarget || '_blank'}
-                        rel="noopener noreferrer"
-                        onClick={() => document.getElementById(`${customCard.form.id}`).submit()}
-                    >
-                        {customCard.form.link_title}
-                    </a>
                 </div>
             </div>
         </React.Fragment>
