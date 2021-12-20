@@ -6,6 +6,7 @@ import {
     createNewMessage,
     createCarousel,
     createCustomCarousel,
+    createCustomCard,
     createVideoSnippet,
     createImageSnippet,
     createComponentMessage,
@@ -50,6 +51,11 @@ export default function (storage) {
             case actionTypes.ADD_CUSTOM_CAROUSEL: {
                 return storeMessage(
                     state.push(createCustomCarousel(action.carousel, MESSAGE_SENDER.RESPONSE))
+                );
+            }
+            case actionTypes.ADD_CUSTOM_CARD: {
+                return storeMessage(
+                    state.push(createCustomCard(action.card, MESSAGE_SENDER.RESPONSE))
                 );
             }
             case actionTypes.ADD_NEW_VIDEO_VIDREPLY: {
