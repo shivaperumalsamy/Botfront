@@ -1,14 +1,11 @@
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-
 import { SESSION_NAME } from 'constants';
-
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { emitMsg } from 'utils/emitMsg';
+import * as actionTypes from './actions/actionTypes';
 import behavior from './reducers/behaviorReducer';
+import { getLocalSession } from './reducers/helper';
 import messages from './reducers/messagesReducer';
 import metadata from './reducers/metadataReducer';
-
-import { getLocalSession } from './reducers/helper';
-import * as actionTypes from './actions/actionTypes';
-import { emitMsg } from 'utils/emitMsg';
 
 const cleanURL = (url) => {
     const regexProtocolHostPort = /https?:\/\/(([A-Za-z0-9-])+(\.?))+[a-z]+(:[0-9]+)?/;
@@ -34,7 +31,7 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
                 if (accessToken) {
                     socket.emit('user_uttered', {
                         message: payload,
-                        customData: { accessToken },
+                        customData: { accessToken, analytics: socket.customData.analytics },
                         session_id: sessionId,
                     });
                 } else {
