@@ -105,10 +105,5 @@
             "\\.(css|scss)$": "<rootDir>/mocks/styleMock.js"
         },
         "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
     }
 }
