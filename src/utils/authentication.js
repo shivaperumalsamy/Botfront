@@ -2,7 +2,7 @@ import { post } from './fetch';
 
 function authenticate(customData) {
     return new Promise((resolve, reject) => {
-        window.getChatbotAuthenticationUrl((data) => {
+        window.getChatbotAuthenticationToken((data) => {
             if (!data.error) {
                 post(customData.authUrl, {
                     token: data.results,
