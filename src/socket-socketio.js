@@ -6,9 +6,13 @@ export default function (socketUrl, customData, path) {
     const options = path ? { path } : {};
     const socket = io(socketUrl, options);
     socket.on('connect', async () => {
-        await authenticate(customData);
-        customData.analytics = getAnalyticsData();
-        socket.customData = customData;
+        try {
+            await authenticate(customData);
+        } catch (err) {
+        } finally {
+            customData.analytics = getAnalyticsData();
+            socket.customData = customData;
+        }
     });
 
     socket.on('connect_error', (error) => {
