@@ -39,7 +39,7 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
                 name="message"
                 placeholder={inputTextFieldHint}
                 disabled={disabledInput || userInput === 'disable'}
-                autoFocus
+                // autoFocus
                 autoComplete="off"
             />
             <button
@@ -56,7 +56,7 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
         </form>
     );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     userInput: state.metadata.get('userInput'),
 });
 
