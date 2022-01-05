@@ -1,46 +1,46 @@
-import ImmutablePropTypes from 'react-immutable-proptypes';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
-    toggleFullScreen,
-    toggleMessageTone,
-    toggleChat,
-    openChat,
-    closeChat,
-    showChat,
-    addUserMessage,
-    emitUserMessage,
-    addResponseMessage,
+    addButtons,
     addCarousel,
     addCustomCarousel,
-    addVideoSnippet,
     addImageSnippet,
-    addButtons,
-    renderCustomComponent,
-    initialize,
+    addResponseMessage,
+    addUserMessage,
+    addVideoSnippet,
+    changeOldUrl,
+    clearMetadata,
+    closeChat,
     connectServer,
     disconnectServer,
-    pullSession,
+    emitUserMessage,
+    evalUrl,
+    initialize,
     newUnreadMessage,
-    triggerMessageDelayed,
-    triggerTooltipSent,
-    showTooltip,
-    clearMetadata,
-    setUserInput,
+    openChat,
+    pullSession,
+    renderCustomComponent,
+    setCustomCss,
+    setDomHighlight,
     setLinkTarget,
     setPageChangeCallbacks,
-    changeOldUrl,
-    setDomHighlight,
-    evalUrl,
-    setCustomCss,
+    setUserInput,
+    showChat,
+    showTooltip,
+    toggleChat,
+    toggleFullScreen,
+    toggleMessageTone,
+    triggerMessageDelayed,
+    triggerTooltipSent,
 } from 'actions';
+import { NEXT_MESSAGE, SESSION_NAME } from 'constants';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import { connect } from 'react-redux';
 import { safeQuerySelectorAll } from 'utils/dom';
-import { emitMsg } from 'utils/emitMsg';
-import { SESSION_NAME, NEXT_MESSAGE } from 'constants';
-import { isVideo, isImage, isButtons, isText, isCarousel, isCustomCarousel } from './msgProcessor';
+import { getLocalSession, storeLocalSession } from '../../store/reducers/helper';
+import { authenticate } from '../../utils/authentication';
 import WidgetLayout from './layout';
-import { storeLocalSession, getLocalSession } from '../../store/reducers/helper';
+import { isButtons, isCarousel, isCustomCarousel, isImage, isText, isVideo } from './msgProcessor';
 
 class Widget extends Component {
     constructor(props) {
@@ -382,7 +382,15 @@ class Widget extends Component {
             socket.on('bot_uttered', (botUttered) => {
                 const accessToken = botUttered.accessToken;
                 if ('expired' in botUttered && botUttered.expired) {
-                    emitMsg(socket, customData, botUttered.text, this.getSessionId());
+                    authenticate(customData)
+                        .catch(() => {})
+                        .finally(() => {
+                            socket.emit('user_uttered', {
+                                message: botUttered.text,
+                                customData,
+                                session_id: this.getSessionId(),
+                            });
+                        });
                 } else {
                     if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
                         sessionStorage.setItem('ACCESS_TOKEN', accessToken);
@@ -395,7 +403,7 @@ class Widget extends Component {
             dispatch(pullSession());
 
             // Request a session from server
-            socket.on('connect', () => {
+            socket.on('connect', async () => {
                 const localId = this.getSessionId();
                 socket.emit('session_request', { session_id: localId });
             });
@@ -489,7 +497,11 @@ class Widget extends Component {
             // check that session_id is confirmed
             if (!sessionId) return;
 
-            emitMsg(socket, customData, initPayload || '/welcome', sessionId);
+            socket.emit('user_uttered', {
+                message: initPayload || '/welcome',
+                customData,
+                session_id: sessionId,
+            });
 
             dispatch(initialize());
         }
