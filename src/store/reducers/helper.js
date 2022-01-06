@@ -1,6 +1,14 @@
 import { MESSAGES_TYPES, MESSAGE_SENDER, SESSION_NAME } from 'constants';
 import { fromJS, Map } from 'immutable';
-import { Buttons, Carousel, CustomCarousel, Image, Message, Video } from 'messagesComponents';
+import {
+    Buttons,
+    Carousel,
+    CustomCard,
+    CustomCarousel,
+    Image,
+    Message,
+    Video,
+} from 'messagesComponents';
 
 export function createNewMessage(text, sender, nextMessageIsTooltip, hidden) {
     return Map({
@@ -32,6 +40,18 @@ export function createCustomCarousel(carousel, sender) {
         sender,
         title: fromJS(carousel.attachment.payload.title),
         elements: fromJS(carousel.attachment.payload.elements),
+        timestamp: new Date().getTime(),
+    });
+}
+
+export function createCustomCard(card, sender) {
+    return Map({
+        type: MESSAGES_TYPES.CUSTOM_CARD,
+        component: CustomCard,
+        sender,
+        title: fromJS(card.attachment.payload.title),
+        text: fromJS(card.attachment.payload.text),
+        form: fromJS(card.attachment.payload.form),
         timestamp: new Date().getTime(),
     });
 }

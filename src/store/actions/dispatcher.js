@@ -41,6 +41,10 @@ export function addCustomCarousel(carousel) {
     store.dispatch(actions.addCustomCarousel(carousel));
 }
 
+export function addCustomCard(card) {
+    store.dispatch(actions.addCustomCard(card));
+}
+
 export function addVideoSnippet(video) {
     store.dispatch(actions.addVideoSnippet(video));
 }

@@ -116,6 +116,13 @@ export function addCustomCarousel(carousel) {
     };
 }
 
+export function addCustomCard(card) {
+    return {
+        type: actions.ADD_CUSTOM_CARD,
+        card,
+    };
+}
+
 export function addVideoSnippet(video) {
     return {
         type: actions.ADD_NEW_VIDEO_VIDREPLY,
