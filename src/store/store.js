@@ -1,6 +1,6 @@
 import { SESSION_NAME } from 'constants';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { emitMsg } from 'utils/emitMsg';
+import { authenticate } from '../utils/authentication';
 import * as actionTypes from './actions/actionTypes';
 import behavior from './reducers/behaviorReducer';
 import { getLocalSession } from './reducers/helper';
@@ -35,7 +35,15 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
                         session_id: sessionId,
                     });
                 } else {
-                    emitMsg(socket, socket.customData, payload, sessionId);
+                    authenticate(socket.customData)
+                        .catch(() => {})
+                        .finally(() => {
+                            socket.emit('user_uttered', {
+                                message: payload,
+                                customData: socket.customData,
+                                session_id: sessionId,
+                            });
+                        });
                 }
                 store.dispatch({
                     type: actionTypes.ADD_NEW_USER_MESSAGE,

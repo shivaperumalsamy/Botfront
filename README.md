@@ -58,18 +58,28 @@ $ python3 -m http.server PORT_NUMBER
 
 Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.
 
+## One step method:
+
+```
+$ cd deployment
+$ bash dev_deployment.sh
+```
+---
+
+## Step by step method:
+
 ### To build the images:
 
 For development:
 
 ```
-docker-compose -f docker-compose-local.yml build
+$ docker-compose -f docker-compose-local.yml build
 ```
 
 For production:
 
 ```
-docker-compose build
+$ docker-compose build
 ```
 
 ### To spin up containers from the images use:
@@ -77,7 +87,7 @@ docker-compose build
 For development:
 
 ```
-docker-compose -f docker-compose-local.yml up
+$ docker-compose -f docker-compose-local.yml up
 ```
 
 ### To push the images to the repository:
@@ -85,7 +95,7 @@ docker-compose -f docker-compose-local.yml up
 Before pushing make sure to login to the account that contains the repository. To login use:
 
 ```
-docker login <account_name>
+$ docker login <account_name>
 ```
 
 The user will be prompted for the username and password.
@@ -93,13 +103,13 @@ The user will be prompted for the username and password.
 For development:
 
 ```
-docker-compose -f docker-compose-local.yml push
+$ docker-compose -f docker-compose-local.yml push
 ```
 
 For production:
 
 ```
-docker-compose push
+$ docker-compose push
 ```
 
 ---
