@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
 import Send from 'assets/send_button';
 import './style.scss';
+import { getDeviceType, isIOS } from '../../../../../../utils/analytics';
 
 const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) => {
     const [inputValue, setInputValue] = useState('');
@@ -29,19 +30,34 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
         <div />
     ) : (
         <form ref={formRef} className="rw-sender" onSubmit={handleSubmit}>
-            <TextareaAutosize
-                type="text"
-                minRows={1}
-                onKeyDown={onEnterPress}
-                maxRows={3}
-                onChange={handleChange}
-                className="rw-new-message"
-                name="message"
-                placeholder={inputTextFieldHint}
-                disabled={disabledInput || userInput === 'disable'}
-                autoFocus
-                autoComplete="off"
-            />
+            {isIOS() ? (
+                <TextareaAutosize
+                    type="text"
+                    minRows={1}
+                    onKeyDown={onEnterPress}
+                    maxRows={3}
+                    onChange={handleChange}
+                    className="rw-new-message"
+                    name="message"
+                    placeholder={inputTextFieldHint}
+                    disabled={disabledInput || userInput === 'disable'}
+                    autoComplete="off"
+                />
+            ) : (
+                <TextareaAutosize
+                    type="text"
+                    minRows={1}
+                    onKeyDown={onEnterPress}
+                    maxRows={3}
+                    onChange={handleChange}
+                    className="rw-new-message"
+                    name="message"
+                    placeholder={inputTextFieldHint}
+                    disabled={disabledInput || userInput === 'disable'}
+                    autoFocus
+                    autoComplete="off"
+                />
+            )}
             <button
                 type="submit"
                 className="rw-send"
@@ -56,7 +72,7 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
         </form>
     );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     userInput: state.metadata.get('userInput'),
 });
 
