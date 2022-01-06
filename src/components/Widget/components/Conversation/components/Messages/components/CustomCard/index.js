@@ -24,18 +24,6 @@ const CustomCard = (props) => {
         }
     };
 
-    const populateElement = (elementObject, index) => {
-        let elements = [];
-        for (var key in elementObject) {
-            if (elementObject.hasOwnProperty(key)) {
-                elements.push(
-                    <input type="hidden" name={elementObject.name} value={elementObject.value} />
-                );
-            }
-        }
-        return elements;
-    };
-
     const { linkTarget } = props;
 
     return (
@@ -46,9 +34,9 @@ const CustomCard = (props) => {
                 onScroll={() => handleScroll()}
             >
                 <div className="rw-custom-card">
-                    <div className="rw-custom-card-subtitle">{customCard.title}</div>
+                    <div className="rw-custom-card-title">{customCard.title}</div>
                     <div className="rw-hr-line"> </div>
-                    <div className="rw-custom-card-title">{customCard.text}</div>
+                    <div className="rw-custom-card-text">{customCard.text}</div>
                     <form
                         name={customCard.form.name}
                         id={customCard.form.id}
@@ -57,19 +45,23 @@ const CustomCard = (props) => {
                         target={customCard.form.target}
                     >
                         {customCard.form.elements.map((element, index) => {
-                            return <>{populateElement(element, index)}</>;
+                            return (
+                                <input
+                                    key={index}
+                                    type="hidden"
+                                    name={element.name}
+                                    value={element.value}
+                                />
+                            );
                         })}
-                        <a
-                            className="rw-custom-card-subtitle"
-                            href={customCard.form.action}
-                            target={linkTarget || '_blank'}
-                            rel="noopener noreferrer"
+                        <div
+                            className="rw-custom-card-button"
                             onClick={() =>
                                 document.getElementById(`${customCard.form.id}`).submit()
                             }
                         >
                             {customCard.form.link_title}
-                        </a>
+                        </div>
                     </form>
                 </div>
             </div>

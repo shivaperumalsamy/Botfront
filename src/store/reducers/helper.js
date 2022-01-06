@@ -3,8 +3,8 @@ import { fromJS, Map } from 'immutable';
 import {
     Buttons,
     Carousel,
-    CustomCarousel,
     CustomCard,
+    CustomCarousel,
     Image,
     Message,
     Video,
@@ -50,7 +50,8 @@ export function createCustomCard(card, sender) {
         component: CustomCard,
         sender,
         title: fromJS(card.attachment.payload.title),
-        elements: fromJS(card.attachment.payload.elements),
+        text: fromJS(card.attachment.payload.text),
+        form: fromJS(card.attachment.payload.form),
         timestamp: new Date().getTime(),
     });
 }

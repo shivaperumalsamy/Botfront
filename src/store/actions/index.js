@@ -119,7 +119,7 @@ export function addCustomCarousel(carousel) {
 export function addCustomCard(card) {
     return {
         type: actions.ADD_CUSTOM_CARD,
-        carocardusel,
+        card,
     };
 }
 

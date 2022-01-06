@@ -1,12 +1,12 @@
 import {
     addButtons,
     addCarousel,
-    addCustomCarousel,
     addCustomCard,
-    addVideoSnippet,
+    addCustomCarousel,
     addImageSnippet,
     addResponseMessage,
     addUserMessage,
+    addVideoSnippet,
     changeOldUrl,
     clearMetadata,
     closeChat,
@@ -41,7 +41,15 @@ import { safeQuerySelectorAll } from 'utils/dom';
 import { getLocalSession, storeLocalSession } from '../../store/reducers/helper';
 import { authenticate } from '../../utils/authentication';
 import WidgetLayout from './layout';
-import { isButtons, isCarousel, isCustomCarousel, isImage, isText, isVideo } from './msgProcessor';
+import {
+    isButtons,
+    isCarousel,
+    isCustomCard,
+    isCustomCarousel,
+    isImage,
+    isText,
+    isVideo,
+} from './msgProcessor';
 
 class Widget extends Component {
     constructor(props) {
