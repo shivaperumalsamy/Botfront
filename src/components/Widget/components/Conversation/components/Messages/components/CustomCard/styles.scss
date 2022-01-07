@@ -14,7 +14,6 @@
     .#{$namespace}custom-card {
         display: flex;
         width: 220px;
-        height: 190px;
         max-width: 220px;
         margin: 12px;
         padding: 10px;
@@ -41,7 +40,6 @@
         .#{$namespace}custom-card-text {
             display: block;
             margin: 7px;
-            overflow: hidden;
             white-space: normal;
             line-height: initial;
             cursor: default;
