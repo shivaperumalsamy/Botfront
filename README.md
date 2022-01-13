@@ -64,6 +64,7 @@ Docker is an open platform for developing, shipping, and running applications. D
 $ cd deployment
 $ bash dev_deployment.sh
 ```
+
 ---
 
 ## Step by step method:
@@ -153,7 +154,7 @@ In your `<body/>`:
                 "id": "",
                 "name": ""
     		}, // Sender Details
-            authUrl: '' // Courtie REST API Endpoint
+            authUrl: '' // COURTney REST API Endpoint
     	}
     }
 </script>

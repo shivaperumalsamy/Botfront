@@ -1,12 +1,11 @@
-import React, { forwardRef, useRef } from 'react';
-
 import PropTypes from 'prop-types';
+import React, { forwardRef, useRef } from 'react';
 import { Provider } from 'react-redux';
-
-import Widget from './components/Widget';
-import { initStore } from '../src/store/store';
-import socket from './socket';
 import ThemeContext from '../src/components/Widget/ThemeContext';
+import { initStore } from '../src/store/store';
+import Widget from './components/Widget';
+import socket from './socket';
+
 // eslint-disable-next-line import/no-mutable-exports
 
 const ConnectedWidget = forwardRef((props, ref) => {
@@ -211,10 +210,10 @@ ConnectedWidget.propTypes = {
 };
 
 ConnectedWidget.defaultProps = {
-    title: 'Courtie',
+    title: 'COURTney',
     subtitle: '',
     customData: {},
-    inputTextFieldHint: 'Message Courtie',
+    inputTextFieldHint: 'Message COURTney',
     connectingText: 'Waiting for server...',
     fullScreenMode: false,
     hideWhenNotConnected: true,
