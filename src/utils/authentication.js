@@ -7,12 +7,12 @@ function authenticate(customData) {
                 token: customData.token,
             })
                 .then((response) => {
-                    customData['accessToken'] = response.accessToken;
-                    sessionStorage.setItem('ACCESS_TOKEN', customData['accessToken']);
+                    sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
                     resolve();
                 })
                 .catch((error) => {
-                    if ('accessToken' in customData) delete customData['accessToken'];
+                    if (sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.removeItem('ACCESS_TOKEN');
                     reject();
                 });
         });
@@ -24,16 +24,17 @@ function authenticate(customData) {
                         token: data.results,
                     })
                         .then((response) => {
-                            customData['accessToken'] = response.accessToken;
-                            sessionStorage.setItem('ACCESS_TOKEN', customData['accessToken']);
+                            sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
                             resolve();
                         })
                         .catch((error) => {
-                            if ('accessToken' in customData) delete customData['accessToken'];
+                            if (sessionStorage.getItem('ACCESS_TOKEN'))
+                                sessionStorage.removeItem('ACCESS_TOKEN');
                             reject();
                         });
                 } else {
-                    if ('accessToken' in customData) delete customData['accessToken'];
+                    if (sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.removeItem('ACCESS_TOKEN');
                     reject();
                 }
             });
