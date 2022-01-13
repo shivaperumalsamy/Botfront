@@ -27,20 +27,21 @@ function initStore(connectingText, socket, storage, docViewer = false, onWidgetE
         }
         const emitMessage = (payload) => {
             const emit = () => {
-                const accessToken = sessionStorage.getItem('ACCESS_TOKEN') || null;
+                let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
                 if (accessToken) {
                     socket.emit('user_uttered', {
                         message: payload,
-                        customData: { accessToken, analytics: socket.customData.analytics },
+                        customData: { ...socket.customData, accessToken },
                         session_id: sessionId,
                     });
                 } else {
                     authenticate(socket.customData)
                         .catch(() => {})
                         .finally(() => {
+                            accessToken = sessionStorage.getItem('ACCESS_TOKEN');
                             socket.emit('user_uttered', {
                                 message: payload,
-                                customData: socket.customData,
+                                customData: { ...socket.customData, accessToken },
                                 session_id: sessionId,
                             });
                         });

@@ -389,20 +389,18 @@ class Widget extends Component {
             socket.createSocket();
 
             socket.on('bot_uttered', (botUttered) => {
-                const accessToken = botUttered.accessToken;
                 if ('expired' in botUttered && botUttered.expired) {
                     authenticate(customData)
                         .catch(() => {})
                         .finally(() => {
+                            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
                             socket.emit('user_uttered', {
                                 message: botUttered.text,
-                                customData,
+                                customData: { ...customData, accessToken },
                                 session_id: this.getSessionId(),
                             });
                         });
                 } else {
-                    if (accessToken && !sessionStorage.getItem('ACCESS_TOKEN'))
-                        sessionStorage.setItem('ACCESS_TOKEN', accessToken);
                     this.handleBotUtterance(botUttered);
                 }
             });
@@ -506,11 +504,26 @@ class Widget extends Component {
             // check that session_id is confirmed
             if (!sessionId) return;
 
-            socket.emit('user_uttered', {
-                message: initPayload || '/welcome',
-                customData,
-                session_id: sessionId,
-            });
+            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+
+            if (accessToken) {
+                socket.emit('user_uttered', {
+                    message: initPayload || '/welcome',
+                    customData: { ...customData, accessToken },
+                    session_id: sessionId,
+                });
+            } else {
+                authenticate(customData)
+                    .catch(() => {})
+                    .finally(() => {
+                        accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                        socket.emit('user_uttered', {
+                            message: initPayload || '/welcome',
+                            customData: { ...customData, accessToken },
+                            session_id: sessionId,
+                        });
+                    });
+            }
 
             dispatch(initialize());
         }
@@ -524,13 +537,26 @@ class Widget extends Component {
             const sessionId = this.getSessionId();
 
             if (!sessionId) return;
+            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
 
-            socket.emit('user_uttered', {
-                message: tooltipPayload,
-                customData,
-                session_id: sessionId,
-            });
-
+            if (accessToken) {
+                socket.emit('user_uttered', {
+                    message: tooltipPayload,
+                    customData: { ...customData, accessToken },
+                    session_id: sessionId,
+                });
+            } else {
+                authenticate(customData)
+                    .catch(() => {})
+                    .finally(() => {
+                        accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                        socket.emit('user_uttered', {
+                            message: tooltipPayload,
+                            customData: { ...customData, accessToken },
+                            session_id: sessionId,
+                        });
+                    });
+            }
             dispatch(triggerTooltipSent(tooltipPayload));
             dispatch(initialize());
         }
