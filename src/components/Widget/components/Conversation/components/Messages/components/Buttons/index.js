@@ -28,6 +28,7 @@ class Buttons extends PureComponent {
         const payload = reply.get('payload');
         const title = reply.get('title');
         chooseReply(payload, title, id);
+        document.querySelector('#rw-new-message-textbox').focus(); // Return focus back to input textbox
     }
 
     renderButtons(message, buttons, persit) {
@@ -54,7 +55,7 @@ class Buttons extends PureComponent {
                                         rel="noopener noreferrer"
                                         className={'rw-reply'}
                                         style={buttonStyle}
-                                        onMouseUp={e => e.stopPropagation()}
+                                        onMouseUp={(e) => e.stopPropagation()}
                                     >
                                         {reply.get('title')}
                                     </a>
@@ -65,12 +66,12 @@ class Buttons extends PureComponent {
                                 <div
                                     key={index}
                                     className={'rw-reply'}
-                                    onClick={e => {
+                                    onClick={(e) => {
                                         e.stopPropagation();
                                         this.handleClick(reply);
                                     }}
                                     style={buttonStyle}
-                                    onMouseUp={e => e.stopPropagation()}
+                                    onMouseUp={(e) => e.stopPropagation()}
                                 >
                                     {reply.get('title')}
                                 </div>
@@ -101,13 +102,13 @@ class Buttons extends PureComponent {
 
 Buttons.contextType = ThemeContext;
 
-const mapStateToProps = state => ({
-    getChosenReply: id => state.messages.get(id).get('chosenReply'),
+const mapStateToProps = (state) => ({
+    getChosenReply: (id) => state.messages.get(id).get('chosenReply'),
     inputState: state.behavior.get('disabledInput'),
     linkTarget: state.metadata.get('linkTarget'),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     toggleInputDisabled: () => dispatch(toggleInputDisabled()),
     chooseReply: (payload, title, id) => {
         dispatch(setButtons(id, title));

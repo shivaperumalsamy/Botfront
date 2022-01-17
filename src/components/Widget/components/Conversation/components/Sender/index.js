@@ -37,6 +37,7 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
                     onKeyDown={onEnterPress}
                     maxRows={3}
                     onChange={handleChange}
+                    id="rw-new-message-textbox"
                     className="rw-new-message"
                     name="message"
                     placeholder={inputTextFieldHint}
@@ -50,6 +51,7 @@ const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) =
                     onKeyDown={onEnterPress}
                     maxRows={3}
                     onChange={handleChange}
+                    id="rw-new-message-textbox"
                     className="rw-new-message"
                     name="message"
                     placeholder={inputTextFieldHint}
