@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import Send from 'assets/send_button';
 import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import TextareaAutosize from 'react-textarea-autosize';
-import Send from 'assets/send_button';
+import { isIOS } from '../../../../../../utils/analytics';
 import './style.scss';
-import { getDeviceType, isIOS } from '../../../../../../utils/analytics';
 
 const Sender = ({ sendMessage, inputTextFieldHint, disabledInput, userInput }) => {
     const [inputValue, setInputValue] = useState('');
