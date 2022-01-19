@@ -139,6 +139,9 @@
     @media screen and (max-width: 800px) {
         margin: 0 12px 12px 0;
     }
+    @media screen and (max-width: 767px) {
+        bottom: 50px;
+    }
     position: fixed;
     right: 0;
     width: auto;
