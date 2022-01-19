@@ -178,3 +178,9 @@
         @include widget-container-fs;
     }
 }
+
+@media screen and (max-width: 767px) {
+    .#{$namespace}widget-container.#{$namespace}chat-open {
+        bottom: 0;
+    }
+}
