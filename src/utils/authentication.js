@@ -5,6 +5,7 @@ function authenticate(customData) {
         return new Promise((resolve, reject) => {
             post(customData.authUrl, {
                 token: customData.token,
+                dev: true,
             })
                 .then((response) => {
                     sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
