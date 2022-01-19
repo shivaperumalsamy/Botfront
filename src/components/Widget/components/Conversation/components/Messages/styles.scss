@@ -64,7 +64,7 @@
     height: 50vh;
     max-height: 425px;
     overflow-y: auto;
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: 767px) {
         height: 510px;
         max-height: 50vh;
     }
@@ -84,7 +84,7 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
     .#{$namespace}messages-container {
         @include messages-container-fs;
     }

@@ -9,7 +9,7 @@
 
 .#{$namespace}widget-container {
     .#{$namespace}conversation-container {
-        @media screen and (min-width: 800px) {
+        @media screen and (min-width: 767px) {
             margin-bottom: 10px;
         }
 
@@ -92,7 +92,7 @@
         animation: slideUp 0.3s ease-in-out;
         transition: all 0.2s ease-in-out;
 
-        @media screen and (max-width: 800px) {
+        @media screen and (max-width: 767px) {
             right: 74px;
             width: calc(100vw - 90px);
         }
@@ -286,7 +286,7 @@
     @include animation(0, 0.5s, rotation-lr);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
     .#{$namespace}hide-sm {
         display: none;
     }

@@ -116,7 +116,7 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 767px) {
     .#{$namespace}conversation-container {
         .#{$namespace}header {
             @include header-fs;
