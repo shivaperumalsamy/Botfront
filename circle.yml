@@ -1,10 +1,10 @@
 machine:
-  node:
-    version: 8.4.0
+    node:
+        version: 8.4.0
 
 dependencies:
-  override:
-    - yarn
+    override:
+        - yarn
 test:
-  override:
-    - yarn run test
+    override:
+        - yarn run test

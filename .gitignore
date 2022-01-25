@@ -12,3 +12,9 @@ module
 
 # Test files
 coverage
+
+# Other files
+.vscode
+.github
+CHANGELOG.md
+.env
