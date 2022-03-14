@@ -40,5 +40,6 @@
 @media screen and (max-width: 767px) {
     .#{$namespace}conversation-container {
         @include conversation-container-fs;
+        box-shadow: none;
     }
 }
