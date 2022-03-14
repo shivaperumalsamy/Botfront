@@ -524,7 +524,7 @@ class Widget extends Component {
                         });
                     });
             }
-
+            dispatch(triggerMessageDelayed(true));
             dispatch(initialize());
         }
     }
