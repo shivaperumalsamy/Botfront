@@ -13,6 +13,7 @@ export const MESSAGES_TYPES = {
     CAROUSEL: 'carousel',
     CUSTOM_CAROUSEL: 'custom_carousel',
     CUSTOM_CARD: 'custom_card',
+    CUSTOM_DATA_TABLE: 'custom_data_table',
     VIDREPLY: {
         VIDEO: 'vidreply',
     },
@@ -42,6 +43,7 @@ export const PROP_TYPES = {
             MESSAGES_TYPES.CAROUSEL,
             MESSAGES_TYPES.CUSTOM_CAROUSEL,
             MESSAGES_TYPES.CUSTOM_CARD,
+            MESSAGES_TYPES.CUSTOM_DATA_TABLE,
             MESSAGES_TYPES.IMGREPLY.IMAGE,
             MESSAGES_TYPES.VIDREPLY.VIDEO,
         ]),
@@ -70,6 +72,11 @@ export const PROP_TYPES = {
     }),
 
     CUSTOM_CARD: ImmutablePropTypes.contains({
+        id: PropTypes.number,
+        sender: senderType,
+    }),
+
+    CUSTOM_DATA_TABLE: ImmutablePropTypes.contains({
         id: PropTypes.number,
         sender: senderType,
     }),
