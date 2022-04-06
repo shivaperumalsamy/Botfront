@@ -7,6 +7,7 @@ import {
     createCarousel,
     createCustomCarousel,
     createCustomCard,
+    createCustomDataTable,
     createVideoSnippet,
     createImageSnippet,
     createComponentMessage,
@@ -56,6 +57,11 @@ export default function (storage) {
             case actionTypes.ADD_CUSTOM_CARD: {
                 return storeMessage(
                     state.push(createCustomCard(action.card, MESSAGE_SENDER.RESPONSE))
+                );
+            }
+            case actionTypes.ADD_CUSTOM_DATA_TABLE: {
+                return storeMessage(
+                    state.push(createCustomDataTable(action.dataTable, MESSAGE_SENDER.RESPONSE))
                 );
             }
             case actionTypes.ADD_NEW_VIDEO_VIDREPLY: {

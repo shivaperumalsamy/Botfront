@@ -3,6 +3,7 @@ import {
     addCarousel,
     addCustomCard,
     addCustomCarousel,
+    addCustomDataTable,
     addImageSnippet,
     addResponseMessage,
     addUserMessage,
@@ -46,6 +47,7 @@ import {
     isCarousel,
     isCustomCard,
     isCustomCarousel,
+    isCustomDataTable,
     isImage,
     isText,
     isVideo,
@@ -608,6 +610,8 @@ class Widget extends Component {
             this.props.dispatch(addCustomCarousel(messageClean));
         } else if (isCustomCard(messageClean)) {
             this.props.dispatch(addCustomCard(messageClean));
+        } else if (isCustomDataTable(messageClean)) {
+            this.props.dispatch(addCustomDataTable(messageClean));
         } else if (isCarousel(messageClean)) {
             this.props.dispatch(addCarousel(messageClean));
         } else if (isVideo(messageClean)) {
