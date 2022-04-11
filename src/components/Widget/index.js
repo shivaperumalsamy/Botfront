@@ -615,7 +615,7 @@ class Widget extends Component {
         } else if (isCustomDataTable(messageClean)) {
             this.props.dispatch(addCustomDataTable(messageClean));
         } else if (isCustomAccordion(messageClean)) {
-            this.props.dispatch(isCustomAccordion(messageClean));
+            this.props.dispatch(addCustomAccordion(messageClean));
         } else if (isCarousel(messageClean)) {
             this.props.dispatch(addCarousel(messageClean));
         } else if (isVideo(messageClean)) {

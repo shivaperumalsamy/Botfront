@@ -3,12 +3,14 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import { addUserMessage, emitUserMessage } from 'actions';
 import { PROP_TYPES } from 'constants';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
+import { connect } from 'react-redux';
+import './styles.scss';
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -46,7 +48,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const CustomAccordion = (props) => {
     const customAccordion = props.message.toJS();
-    const [expanded, setExpanded] = useState();
+    const [expanded, setExpanded] = useState('panel1');
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -65,27 +67,20 @@ const CustomAccordion = (props) => {
                             <AccordionSummary
                                 aria-controls={`panel${index + 1}d-content`}
                                 id={`panel${index + 1}d-header`}
+                                className="rw-accordion-header"
                             >
-                                <Typography>{element.title}</Typography>
+                                <Typography>{element.header}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <ReactMarkdown
                                     className={'rw-markdown'}
                                     source={element.body}
-                                    linkTarget={(url) => {
-                                        if (
-                                            !url.startsWith('mailto') &&
-                                            !url.startsWith('javascript')
-                                        )
-                                            return '_blank';
-                                        return undefined;
-                                    }}
                                     transformLinkUri={null}
                                     renderers={{
                                         link: (props) => (
                                             <a
                                                 href={props.href}
-                                                target={linkTarget || '_blank'}
+                                                target={'_blank'}
                                                 rel="noopener noreferrer"
                                                 onMouseUp={(e) => e.stopPropagation()}
                                             >

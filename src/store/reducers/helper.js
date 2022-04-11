@@ -74,7 +74,7 @@ export function createCustomDataTable(dataTable, sender) {
 
 export function createCustomAccordion(accordion, sender) {
     return Map({
-        type: MESSAGES_TYPES.CUSTOM_DATA_TABLE,
+        type: MESSAGES_TYPES.CUSTOM_ACCORDION,
         component: CustomAccordion,
         sender,
         title: fromJS(accordion.attachment.payload.title),
