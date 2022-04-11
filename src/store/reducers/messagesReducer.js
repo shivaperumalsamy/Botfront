@@ -8,6 +8,7 @@ import {
     createCustomCarousel,
     createCustomCard,
     createCustomDataTable,
+    createCustomAccordion,
     createVideoSnippet,
     createImageSnippet,
     createComponentMessage,
@@ -62,6 +63,11 @@ export default function (storage) {
             case actionTypes.ADD_CUSTOM_DATA_TABLE: {
                 return storeMessage(
                     state.push(createCustomDataTable(action.dataTable, MESSAGE_SENDER.RESPONSE))
+                );
+            }
+            case actionTypes.ADD_CUSTOM_ACCORDION: {
+                return storeMessage(
+                    state.push(createCustomAccordion(action.accordion, MESSAGE_SENDER.RESPONSE))
                 );
             }
             case actionTypes.ADD_NEW_VIDEO_VIDREPLY: {
