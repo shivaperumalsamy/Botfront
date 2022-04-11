@@ -6,6 +6,7 @@ import {
     CustomCard,
     CustomCarousel,
     CustomDataTable,
+    CustomAccordion,
     Image,
     Message,
     Video,
@@ -67,6 +68,17 @@ export function createCustomDataTable(dataTable, sender) {
         pagination: fromJS(dataTable.attachment.payload.pagination),
         pageSize: fromJS(dataTable.attachment.payload.page_size),
         elements: fromJS(dataTable.attachment.payload.elements),
+        timestamp: new Date().getTime(),
+    });
+}
+
+export function createCustomAccordion(accordion, sender) {
+    return Map({
+        type: MESSAGES_TYPES.CUSTOM_ACCORDION,
+        component: CustomAccordion,
+        sender,
+        title: fromJS(accordion.attachment.payload.title),
+        elements: fromJS(accordion.attachment.payload.elements),
         timestamp: new Date().getTime(),
     });
 }

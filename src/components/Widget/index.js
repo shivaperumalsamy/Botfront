@@ -4,6 +4,7 @@ import {
     addCustomCard,
     addCustomCarousel,
     addCustomDataTable,
+    addCustomAccordion,
     addImageSnippet,
     addResponseMessage,
     addUserMessage,
@@ -48,6 +49,7 @@ import {
     isCustomCard,
     isCustomCarousel,
     isCustomDataTable,
+    isCustomAccordion,
     isImage,
     isText,
     isVideo,
@@ -612,6 +614,8 @@ class Widget extends Component {
             this.props.dispatch(addCustomCard(messageClean));
         } else if (isCustomDataTable(messageClean)) {
             this.props.dispatch(addCustomDataTable(messageClean));
+        } else if (isCustomAccordion(messageClean)) {
+            this.props.dispatch(addCustomAccordion(messageClean));
         } else if (isCarousel(messageClean)) {
             this.props.dispatch(addCarousel(messageClean));
         } else if (isVideo(messageClean)) {

@@ -82,7 +82,7 @@ const CustomDataTable = (props) => {
         <React.Fragment>
             <div
                 className="rw-data-table-container ag-theme-alpine"
-                style={{ height: 300, width: '95%' }}
+                style={{ height: 300, width: '96%' }}
             >
                 <AgGridReact
                     columnDefs={customDataTable.columns}
