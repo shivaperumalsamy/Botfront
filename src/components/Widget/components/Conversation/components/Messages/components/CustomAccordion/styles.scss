@@ -1,8 +1,22 @@
 @import 'variables.scss';
 @import 'common.scss';
 
-.#{$namespace}accordion-container {
-    .#{$namespace}accordion-header {
-        margin-top: 0;
+.#{$namespace}conversation-container {
+    .#{$namespace}message {
+        .#{$namespace}accordion-container {
+            .MuiAccordionSummary-content {
+                margin-top: 0;
+            }
+
+            .#{$namespace}markdown {
+                p {
+                    margin-bottom: 1em;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
     }
 }
