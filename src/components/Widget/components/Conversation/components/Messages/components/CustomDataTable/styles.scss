@@ -1,0 +1,15 @@
+@import 'variables.scss';
+@import 'common.scss';
+
+.#{$namespace}data-table-container {
+    height: 300px;
+    width: 96%;
+    .ag-paging-panel {
+        .ag-paging-row-summary-panel {
+            margin: 0 12px;
+        }
+        .ag-paging-page-summary-panel {
+            margin: 0 8px;
+        }
+    }
+}
