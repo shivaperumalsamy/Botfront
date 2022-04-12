@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import LinkCellRenderer from './linkCellRenderer';
+import './styles.scss';
 
 const CustomDataTable = (props) => {
     const customDataTable = props.message.toJS();
@@ -80,10 +81,7 @@ const CustomDataTable = (props) => {
 
     return (
         <React.Fragment>
-            <div
-                className="rw-data-table-container ag-theme-alpine"
-                style={{ height: 300, width: '96%' }}
-            >
+            <div className="rw-data-table-container ag-theme-alpine">
                 <AgGridReact
                     columnDefs={customDataTable.columns}
                     defaultColDef={defaultColumnDefs}
