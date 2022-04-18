@@ -65,6 +65,7 @@ export function createCustomDataTable(dataTable, sender) {
         sender,
         title: fromJS(dataTable.attachment.payload.title),
         columns: fromJS(dataTable.attachment.payload.columns),
+        notes: fromJS(dataTable.attachment.payload.notes),
         pagination: fromJS(dataTable.attachment.payload.pagination),
         pageSize: fromJS(dataTable.attachment.payload.page_size),
         elements: fromJS(dataTable.attachment.payload.elements),
