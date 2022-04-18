@@ -81,16 +81,19 @@ const CustomDataTable = (props) => {
 
     return (
         <React.Fragment>
-            <div className="rw-data-table-container ag-theme-alpine">
-                <AgGridReact
-                    columnDefs={customDataTable.columns}
-                    defaultColDef={defaultColumnDefs}
-                    columnTypes={columnTypes}
-                    rowData={customDataTable.elements}
-                    pagination={customDataTable.pagination}
-                    paginationPageSize={customDataTable.pageSize}
-                    gridOptions={gridOptions}
-                ></AgGridReact>
+            <div className="rw-data-table-wrapper">
+                <div className="rw-data-table-container ag-theme-alpine">
+                    <AgGridReact
+                        columnDefs={customDataTable.columns}
+                        defaultColDef={defaultColumnDefs}
+                        columnTypes={columnTypes}
+                        rowData={customDataTable.elements}
+                        pagination={customDataTable.pagination}
+                        paginationPageSize={customDataTable.pageSize}
+                        gridOptions={gridOptions}
+                    ></AgGridReact>
+                </div>
+                <div className="rw-data-table-notes">{customDataTable.notes}</div>
             </div>
         </React.Fragment>
     );
