@@ -5,7 +5,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: utcourtchatbotregistry.azurecr.io/utcourt-botfront:latest
+        image: test-slc-nexus-nxrm01.utahcourts.local/botfront:dev-latest
         container_name: botfront
         ports:
             - 80:80
