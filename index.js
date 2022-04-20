@@ -2,8 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import RasaWebchatPro from './src/pro-src/rules-wrapper';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import * as Icons from '@fortawesome/free-solid-svg-icons';
 
 import './src/pro-src/index.css';
+
+const iconList = Object.keys(Icons)
+    .filter((key) => key !== 'fas' && key !== 'prefix')
+    .map((icon) => Icons[icon]);
+
+library.add(...iconList);
 
 class RasaWebchatProWithRules extends React.Component {
     constructor(props) {
