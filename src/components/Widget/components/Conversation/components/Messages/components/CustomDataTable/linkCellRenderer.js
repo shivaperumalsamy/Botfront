@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 export default (props) => {
@@ -9,6 +10,13 @@ export default (props) => {
             </a>
         );
     } else {
-        return <span>{cellValue.text}</span>;
+        return (
+            <span>
+                {cellValue.icon && (
+                    <FontAwesomeIcon icon={cellValue.icon.name} style={cellValue.icon.style} />
+                )}
+                {' ' + cellValue.text}
+            </span>
+        );
     }
 };

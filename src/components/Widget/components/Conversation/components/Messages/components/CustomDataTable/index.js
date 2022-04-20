@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { addUserMessage, emitUserMessage } from 'actions';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -79,6 +80,34 @@ const CustomDataTable = (props) => {
         flex: 1,
     };
 
+    const renderTableNotes = () => {
+        if (customDataTable.notes) {
+            if (customDataTable.notes.icons.length) {
+                let notePartitions = customDataTable.notes.text.split(':icon');
+                return (
+                    <div className="rw-data-table-notes">
+                        {notePartitions.map((note, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    {note}
+                                    {index != notePartitions.length - 1 && (
+                                        <FontAwesomeIcon
+                                            key={index}
+                                            icon={customDataTable.notes.icons[index].name}
+                                            style={customDataTable.notes.icons[index].style}
+                                        />
+                                    )}
+                                </React.Fragment>
+                            );
+                        })}
+                    </div>
+                );
+            } else {
+                return <div className="rw-data-table-notes">{customDataTable.notes.text}</div>;
+            }
+        }
+    };
+
     return (
         <React.Fragment>
             <div className="rw-data-table-wrapper">
@@ -93,7 +122,7 @@ const CustomDataTable = (props) => {
                         gridOptions={gridOptions}
                     ></AgGridReact>
                 </div>
-                <div className="rw-data-table-notes">{customDataTable.notes}</div>
+                {renderTableNotes()}
             </div>
         </React.Fragment>
     );
