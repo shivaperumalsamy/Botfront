@@ -5,6 +5,8 @@ import {
     Carousel,
     CustomCard,
     CustomCarousel,
+    CustomDataTable,
+    CustomAccordion,
     Image,
     Message,
     Video,
@@ -52,6 +54,32 @@ export function createCustomCard(card, sender) {
         title: fromJS(card.attachment.payload.title),
         text: fromJS(card.attachment.payload.text),
         form: fromJS(card.attachment.payload.form),
+        timestamp: new Date().getTime(),
+    });
+}
+
+export function createCustomDataTable(dataTable, sender) {
+    return Map({
+        type: MESSAGES_TYPES.CUSTOM_DATA_TABLE,
+        component: CustomDataTable,
+        sender,
+        title: fromJS(dataTable.attachment.payload.title),
+        columns: fromJS(dataTable.attachment.payload.columns),
+        notes: fromJS(dataTable.attachment.payload.notes),
+        pagination: fromJS(dataTable.attachment.payload.pagination),
+        pageSize: fromJS(dataTable.attachment.payload.page_size),
+        elements: fromJS(dataTable.attachment.payload.elements),
+        timestamp: new Date().getTime(),
+    });
+}
+
+export function createCustomAccordion(accordion, sender) {
+    return Map({
+        type: MESSAGES_TYPES.CUSTOM_ACCORDION,
+        component: CustomAccordion,
+        sender,
+        title: fromJS(accordion.attachment.payload.title),
+        elements: fromJS(accordion.attachment.payload.elements),
         timestamp: new Date().getTime(),
     });
 }

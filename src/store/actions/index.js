@@ -123,6 +123,20 @@ export function addCustomCard(card) {
     };
 }
 
+export function addCustomDataTable(dataTable) {
+    return {
+        type: actions.ADD_CUSTOM_DATA_TABLE,
+        dataTable,
+    };
+}
+
+export function addCustomAccordion(accordion) {
+    return {
+        type: actions.ADD_CUSTOM_ACCORDION,
+        accordion,
+    };
+}
+
 export function addVideoSnippet(video) {
     return {
         type: actions.ADD_NEW_VIDEO_VIDREPLY,

@@ -11,6 +11,8 @@ import {
     Carousel,
     CustomCarousel,
     CustomCard,
+    CustomDataTable,
+    CustomAccordion,
     Buttons,
 } from 'messagesComponents';
 
@@ -64,6 +66,12 @@ class Messages extends Component {
                 }
                 case MESSAGES_TYPES.CUSTOM_CARD: {
                     return CustomCard;
+                }
+                case MESSAGES_TYPES.CUSTOM_DATA_TABLE: {
+                    return CustomDataTable;
+                }
+                case MESSAGES_TYPES.CUSTOM_ACCORDION: {
+                    return CustomAccordion;
                 }
                 case MESSAGES_TYPES.VIDREPLY.VIDEO: {
                     return Video;

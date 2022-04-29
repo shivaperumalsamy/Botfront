@@ -45,6 +45,14 @@ export function addCustomCard(card) {
     store.dispatch(actions.addCustomCard(card));
 }
 
+export function addCustomDataTable(dataTable) {
+    store.dispatch(actions.addCustomDataTable(dataTable));
+}
+
+export function addCustomAccordion(accordion) {
+    store.dispatch(actions.addCustomAccordion(accordion));
+}
+
 export function addVideoSnippet(video) {
     store.dispatch(actions.addVideoSnippet(video));
 }

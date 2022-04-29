@@ -67,6 +67,7 @@ function getAnalyticsData() {
         deviceType: getDeviceType(),
         browser: getBrowser(),
         timeZone: getTimeZone(),
+        timestamp: new Date().toISOString(),
     };
 }
 

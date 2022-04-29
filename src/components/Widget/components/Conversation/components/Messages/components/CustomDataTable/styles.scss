@@ -1,0 +1,29 @@
+@import 'variables.scss';
+@import 'common.scss';
+
+.#{$namespace}message {
+    .#{$namespace}data-table-wrapper {
+        width: 96%;
+        .#{$namespace}data-table-container {
+            height: 300px;
+            .ag-paging-panel {
+                justify-content: center;
+                .ag-paging-row-summary-panel {
+                    margin: 0 12px;
+                }
+                .ag-paging-page-summary-panel {
+                    margin: 0 6px;
+                }
+                .ag-paging-button {
+                    margin: 0 4px;
+                }
+            }
+        }
+
+        .#{$namespace}data-table-notes {
+            margin-top: 5px;
+            margin-left: 7px;
+            font-size: 13px;
+        }
+    }
+}
