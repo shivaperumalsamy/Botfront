@@ -64,9 +64,9 @@ function getTimeZone() {
 
 function getAnalyticsData() {
     return {
-        device_type: getDeviceType(),
+        deviceType: getDeviceType(),
         browser: getBrowser(),
-        time_zone: getTimeZone(),
+        timeZone: getTimeZone(),
         timestamp: new Date().toISOString(),
     };
 }
