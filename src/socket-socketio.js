@@ -7,7 +7,7 @@ export default function (socketUrl, customData, path) {
     const socket = io(socketUrl, options);
     socket.on('connect', async () => {
         try {
-            await authenticate(customData);
+            if (!sessionStorage.getItem('ACCESS_TOKEN')) await authenticate(customData);
         } catch (err) {
         } finally {
             customData.analytics = getAnalyticsData();
