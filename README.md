@@ -28,6 +28,12 @@ A chat widget to deploy virtual assistants made with [Rasa](https://github.com/r
 
 ---
 
+## Prerequisite
+
+-   Node version 12.16.1
+
+---
+
 ## Steps To Run
 
 #### Continuous Integration/Install Command:
