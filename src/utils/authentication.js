@@ -1,6 +1,23 @@
 import { post } from './fetch';
 
 function authenticate(customData) {
+    if ('username' in customData && 'password' in customData) {
+        return new Promise((resolve, reject) => {
+            post(customData.authUrl, {
+                username: customData.username,
+                password: customData.password,
+            })
+                .then((response) => {
+                    sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
+                    resolve();
+                })
+                .catch((error) => {
+                    if (sessionStorage.getItem('ACCESS_TOKEN'))
+                        sessionStorage.removeItem('ACCESS_TOKEN');
+                    reject();
+                });
+        });
+    }
     if ('token' in customData) {
         return new Promise((resolve, reject) => {
             post(customData.authUrl, {
