@@ -1,4 +1,5 @@
 import { post } from './fetch';
+import { ACCESS_TOKEN_NAME } from 'constants';
 
 function authenticate(customData) {
     if ('username' in customData && 'password' in customData) {
@@ -8,12 +9,12 @@ function authenticate(customData) {
                 password: customData.password,
             })
                 .then((response) => {
-                    sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
+                    sessionStorage.setItem(ACCESS_TOKEN_NAME, response.accessToken);
                     resolve();
                 })
                 .catch((error) => {
-                    if (sessionStorage.getItem('ACCESS_TOKEN'))
-                        sessionStorage.removeItem('ACCESS_TOKEN');
+                    if (sessionStorage.getItem(ACCESS_TOKEN_NAME))
+                        sessionStorage.removeItem(ACCESS_TOKEN_NAME);
                     reject();
                 });
         });
@@ -25,12 +26,12 @@ function authenticate(customData) {
                 dev: true,
             })
                 .then((response) => {
-                    sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
+                    sessionStorage.setItem(ACCESS_TOKEN_NAME, response.accessToken);
                     resolve();
                 })
                 .catch((error) => {
-                    if (sessionStorage.getItem('ACCESS_TOKEN'))
-                        sessionStorage.removeItem('ACCESS_TOKEN');
+                    if (sessionStorage.getItem(ACCESS_TOKEN_NAME))
+                        sessionStorage.removeItem(ACCESS_TOKEN_NAME);
                     reject();
                 });
         });
@@ -42,17 +43,17 @@ function authenticate(customData) {
                         token: data.results,
                     })
                         .then((response) => {
-                            sessionStorage.setItem('ACCESS_TOKEN', response.accessToken);
+                            sessionStorage.setItem(ACCESS_TOKEN_NAME, response.accessToken);
                             resolve();
                         })
                         .catch((error) => {
-                            if (sessionStorage.getItem('ACCESS_TOKEN'))
-                                sessionStorage.removeItem('ACCESS_TOKEN');
+                            if (sessionStorage.getItem(ACCESS_TOKEN_NAME))
+                                sessionStorage.removeItem(ACCESS_TOKEN_NAME);
                             reject();
                         });
                 } else {
-                    if (sessionStorage.getItem('ACCESS_TOKEN'))
-                        sessionStorage.removeItem('ACCESS_TOKEN');
+                    if (sessionStorage.getItem(ACCESS_TOKEN_NAME))
+                        sessionStorage.removeItem(ACCESS_TOKEN_NAME);
                     reject();
                 }
             });

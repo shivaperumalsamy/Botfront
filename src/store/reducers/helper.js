@@ -167,12 +167,12 @@ export function storeLocalSession(storage, key, sid) {
         const parsedSession = JSON.parse(cachedSession);
         session = {
             ...parsedSession,
-            session_id: sid,
+            sessionId: sid,
         };
     } else {
-        // No existing local session, create a new empty session with only session_id
+        // No existing local session, create a new empty session with only sessionId
         session = {
-            session_id: sid,
+            sessionId: sid,
         };
     }
     // Store updated session to storage

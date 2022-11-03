@@ -5,7 +5,7 @@ import { EventEmitter } from 'events';
 /*
   This implementation mimics the SocketIO implementation.
 */
-export default function(socketUrl, customData, _path, options) {
+export default function (socketUrl, customData, _path, options) {
     const socket = SockJS(socketUrl + (_path || ''));
     const stomp = Stomp.over(socket);
 
@@ -15,7 +15,7 @@ export default function(socketUrl, customData, _path, options) {
 
     const socketProxy = new EventEmitter();
 
-    const send = message => {
+    const send = (message) => {
         stomp.send(MESSAGES_CHANNEL, {}, JSON.stringify(message));
     };
 
@@ -26,7 +26,7 @@ export default function(socketUrl, customData, _path, options) {
         return urlarray[index];
     };
 
-    socketProxy.on('user_uttered', data => {
+    socketProxy.on('user_uttered', (data) => {
         send({
             type: 'CHAT',
             content: JSON.stringify(data),
@@ -56,18 +56,18 @@ export default function(socketUrl, customData, _path, options) {
         );
     };
 
-    socketProxy.onerror = error => {
+    socketProxy.onerror = (error) => {
         // eslint-disable-next-line no-console
         console.log(error);
     };
 
-    const emitBotUtteredMessage = message => {
+    const emitBotUtteredMessage = (message) => {
         delete message.recipient_id;
         // console.log("message", message);
         socketProxy.emit('bot_uttered', message);
     };
 
-    socketProxy.onIncomingMessage = payload => {
+    socketProxy.onIncomingMessage = (payload) => {
         const message = JSON.parse(payload.body);
 
         if (message.type === 'JOIN') {
@@ -77,11 +77,11 @@ export default function(socketUrl, customData, _path, options) {
             socketProxy.emit('disconnect', message.content || 'server left');
         } else if (message.type === 'SESSION_CONFIRM') {
             const props = JSON.parse(message.content);
-            socketProxy.emit('session_confirm', { session_id: socketProxy.id, ...props });
+            socketProxy.emit('session_confirm', { sessionId: socketProxy.id, ...props });
         } else if (message.type === 'CHAT') {
             const agentMessage = JSON.parse(message.content);
             if (agentMessage instanceof Array) {
-                agentMessage.forEach(message => emitBotUtteredMessage(message));
+                agentMessage.forEach((message) => emitBotUtteredMessage(message));
             } else {
                 emitBotUtteredMessage(agentMessage);
             }

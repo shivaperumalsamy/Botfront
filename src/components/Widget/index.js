@@ -34,7 +34,7 @@ import {
     triggerMessageDelayed,
     triggerTooltipSent,
 } from 'actions';
-import { NEXT_MESSAGE, SESSION_NAME } from 'constants';
+import { NEXT_MESSAGE, SESSION_NAME, ACCESS_TOKEN_NAME } from 'constants';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -42,6 +42,7 @@ import { connect } from 'react-redux';
 import { safeQuerySelectorAll } from 'utils/dom';
 import { getLocalSession, storeLocalSession } from '../../store/reducers/helper';
 import { authenticate } from '../../utils/authentication';
+import { getAnalyticsData } from '../../utils/analytics';
 import WidgetLayout from './layout';
 import {
     isButtons,
@@ -69,6 +70,16 @@ class Widget extends Component {
     }
 
     componentDidMount() {
+        const { socket } = this.props;
+        if (socket.customData.sessionPersistence)
+            addEventListener('beforeunload', async (event) => {
+                await socket.emit('save_chat_details', {
+                    accessToken: sessionStorage.getItem(ACCESS_TOKEN_NAME),
+                    chatSession: sessionStorage.getItem(SESSION_NAME),
+                    appSessionId: socket.customData.appSessionId,
+                });
+            });
+
         const { connectOn, autoClearCache, storage, dispatch, defaultHighlightAnimation } =
             this.props;
 
@@ -116,8 +127,6 @@ class Widget extends Component {
     }
 
     componentWillUnmount() {
-        const { socket } = this.props;
-
         if (socket) {
             socket.close();
         }
@@ -127,9 +136,9 @@ class Widget extends Component {
 
     getSessionId() {
         const { storage } = this.props;
-        // Get the local session, check if there is an existing session_id
+        // Get the local session, check if there is an existing sessionId
         const localSession = getLocalSession(storage, SESSION_NAME);
-        const localId = localSession ? localSession.session_id : null;
+        const localId = localSession ? localSession.sessionId : null;
         return localId;
     }
 
@@ -397,11 +406,11 @@ class Widget extends Component {
                     authenticate(customData)
                         .catch(() => {})
                         .finally(() => {
-                            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                            let accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
                             socket.emit('user_uttered', {
                                 message: botUttered.text,
                                 customData: { ...customData, accessToken },
-                                session_id: this.getSessionId(),
+                                sessionId: this.getSessionId(),
                             });
                         });
                 } else {
@@ -416,29 +425,49 @@ class Widget extends Component {
             // Request a session from server
             socket.on('connect', async () => {
                 const localId = this.getSessionId();
-                socket.emit('session_request', { session_id: localId });
+                try {
+                    if (!sessionStorage.getItem(ACCESS_TOKEN_NAME)) await authenticate(customData);
+                } catch (err) {
+                    console.log(err);
+                } finally {
+                    customData.analytics = getAnalyticsData();
+                    socket.customData = customData;
+                    socket.emit('session_request', {
+                        sessionId: localId,
+                        accessToken: socket.customData.sessionPersistence
+                            ? sessionStorage.getItem(ACCESS_TOKEN_NAME) || null
+                            : null,
+                        appSessionId: socket.customData.sessionPersistence
+                            ? socket.customData.appSessionId
+                            : null,
+                    });
+                }
             });
 
             // When session_confirm is received from the server:
             socket.on('session_confirm', (sessionObject) => {
-                const remoteId =
-                    sessionObject && sessionObject.session_id
-                        ? sessionObject.session_id
-                        : sessionObject;
+                if (sessionObject) {
+                    var remoteId = sessionObject.sessionId;
+                    if (socket.customData.sessionPersistence) {
+                        var chatSession = sessionObject.chatSession;
+                        if (chatSession) sessionStorage.setItem(SESSION_NAME, chatSession);
+                        dispatch(pullSession());
+                    }
+                }
 
                 // eslint-disable-next-line no-console
-                // console.log(`session_confirm:${socket.socket.id} session_id:${remoteId}`);
+                // console.log(`session_confirm:${socket.socket.id} sessionId:${remoteId}`);
                 // Store the initial state to both the redux store and the storage, set connected to true
                 dispatch(connectServer());
                 /*
-        Check if the session_id is consistent with the server
+        Check if the sessionId is consistent with the server
         If the localId is null or different from the remote_id,
         start a new session.
         */
                 const localId = this.getSessionId();
                 if (localId !== remoteId) {
                     // storage.clear();
-                    // Store the received session_id to storage
+                    // Store the received sessionId to storage
 
                     storeLocalSession(storage, SESSION_NAME, remoteId);
                     dispatch(pullSession());
@@ -505,26 +534,26 @@ class Widget extends Component {
 
             const sessionId = this.getSessionId();
 
-            // check that session_id is confirmed
+            // check that sessionId is confirmed
             if (!sessionId) return;
 
-            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+            let accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
 
             if (accessToken) {
                 socket.emit('user_uttered', {
                     message: initPayload || '/welcome',
                     customData: { ...customData, accessToken },
-                    session_id: sessionId,
+                    sessionId: sessionId,
                 });
             } else {
                 authenticate(customData)
                     .catch(() => {})
                     .finally(() => {
-                        accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                        accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
                         socket.emit('user_uttered', {
                             message: initPayload || '/welcome',
                             customData: { ...customData, accessToken },
-                            session_id: sessionId,
+                            sessionId: sessionId,
                         });
                     });
             }
@@ -541,23 +570,23 @@ class Widget extends Component {
             const sessionId = this.getSessionId();
 
             if (!sessionId) return;
-            let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+            let accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
 
             if (accessToken) {
                 socket.emit('user_uttered', {
                     message: tooltipPayload,
                     customData: { ...customData, accessToken },
-                    session_id: sessionId,
+                    sessionId: sessionId,
                 });
             } else {
                 authenticate(customData)
                     .catch(() => {})
                     .finally(() => {
-                        accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                        accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
                         socket.emit('user_uttered', {
                             message: tooltipPayload,
                             customData: { ...customData, accessToken },
-                            session_id: sessionId,
+                            sessionId: sessionId,
                         });
                     });
             }
