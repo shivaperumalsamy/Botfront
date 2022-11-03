@@ -444,12 +444,6 @@ class Widget extends Component {
                 }
             });
 
-            // socket.on('receive_chat_details', (data) => {
-            //     let localId = null;
-            //     if (data && data['sessionId']) localId = data['sessionId'];
-            //     socket.emit('session_request', { sessionId: localId });
-            // });
-
             // When session_confirm is received from the server:
             socket.on('session_confirm', (sessionObject) => {
                 if (sessionObject) {
