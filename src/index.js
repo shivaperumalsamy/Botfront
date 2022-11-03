@@ -59,8 +59,8 @@ const ConnectedWidget = forwardRef((props, ref) => {
             this.socket.on('session_confirm', (sessionObject) => {
                 this.sessionConfirmed = true;
                 this.sessionId =
-                    sessionObject && sessionObject.session_id
-                        ? sessionObject.session_id
+                    sessionObject && sessionObject.sessionId
+                        ? sessionObject.sessionId
                         : sessionObject;
             });
             this.onEvents.forEach((event) => {

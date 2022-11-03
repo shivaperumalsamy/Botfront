@@ -1,4 +1,4 @@
-import { SESSION_NAME } from 'constants';
+import { SESSION_NAME, ACCESS_TOKEN_NAME } from 'constants';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { authenticate } from '../utils/authentication';
 import * as actionTypes from './actions/actionTypes';
@@ -21,28 +21,28 @@ const trimQueryString = (url) => {
 function initStore(connectingText, socket, storage, docViewer = false, onWidgetEvent) {
     const customMiddleWare = (store) => (next) => (action) => {
         const localSession = getLocalSession(storage, SESSION_NAME);
-        let sessionId = localSession ? localSession.session_id : null;
+        let sessionId = localSession ? localSession.sessionId : null;
         if (!sessionId && socket.sessionId) {
             sessionId = socket.sessionId;
         }
         const emitMessage = (payload) => {
             const emit = () => {
-                let accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                let accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
                 if (accessToken) {
                     socket.emit('user_uttered', {
                         message: payload,
                         customData: { ...socket.customData, accessToken },
-                        session_id: sessionId,
+                        sessionId: sessionId,
                     });
                 } else {
                     authenticate(socket.customData)
                         .catch(() => {})
                         .finally(() => {
-                            accessToken = sessionStorage.getItem('ACCESS_TOKEN');
+                            accessToken = sessionStorage.getItem(ACCESS_TOKEN_NAME);
                             socket.emit('user_uttered', {
                                 message: payload,
                                 customData: { ...socket.customData, accessToken },
-                                session_id: sessionId,
+                                sessionId: sessionId,
                             });
                         });
                 }
