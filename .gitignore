@@ -22,6 +22,7 @@ CHANGELOG.md
 .vscode/*
 .husky/*
 .github/*
+node
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files

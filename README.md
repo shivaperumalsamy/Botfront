@@ -27,7 +27,7 @@ A chat widget to deploy virtual assistants made with [Rasa](https://github.com/r
 -   Typing indications
 -   Smart delay between messages
 -   Easy to import in a script tag or as a React Component
-
+-   Custom components (card design etc.,)
 ---
 
 ## Prerequisite
