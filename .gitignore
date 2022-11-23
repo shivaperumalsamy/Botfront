@@ -18,3 +18,7 @@ coverage
 .github
 CHANGELOG.md
 .env
+
+.vscode/*
+.husky/*
+.github/*
