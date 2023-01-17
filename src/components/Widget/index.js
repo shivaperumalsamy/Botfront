@@ -71,7 +71,7 @@ class Widget extends Component {
 
     componentDidMount() {
         const { socket } = this.props;
-        if (socket.customData.sessionPersistence)
+        if (socket && socket.customData.sessionPersistence)
             addEventListener('beforeunload', async (event) => {
                 await socket.emit('save_chat_details', {
                     accessToken: sessionStorage.getItem(ACCESS_TOKEN_NAME),
@@ -127,6 +127,7 @@ class Widget extends Component {
     }
 
     componentWillUnmount() {
+        const { socket } = this.props;
         if (socket) {
             socket.close();
         }
