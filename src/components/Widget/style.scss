@@ -175,7 +175,7 @@
 @media screen and (max-width: 767px) {
     .#{$namespace}widget-container.#{$namespace}chat-open {
         @include widget-container-fs;
-        height: calc(100% - 55px);
+        height: calc(100% - 105px) !important;
         bottom: 55px;
     }
 }
