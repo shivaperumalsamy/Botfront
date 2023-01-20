@@ -72,13 +72,15 @@ class Widget extends Component {
     componentDidMount() {
         const { socket } = this.props;
         if (socket && socket.customData.sessionPersistence)
-            addEventListener('beforeunload', async (event) => {
+            window.onbeforeunload = async (event) => {
                 await socket.emit('save_chat_details', {
                     accessToken: sessionStorage.getItem(ACCESS_TOKEN_NAME),
                     chatSession: sessionStorage.getItem(SESSION_NAME),
                     appSessionId: socket.customData.appSessionId,
                 });
-            });
+                sessionStorage.removeItem(ACCESS_TOKEN_NAME);
+                sessionStorage.removeItem(SESSION_NAME);
+            };
 
         const { connectOn, autoClearCache, storage, dispatch, defaultHighlightAnimation } =
             this.props;
@@ -399,7 +401,7 @@ class Widget extends Component {
             tooltipDelay,
             customData,
         } = this.props;
-        if (!socket.isInitialized()) {
+        if (socket && !socket.isInitialized()) {
             socket.createSocket();
 
             socket.on('bot_uttered', (botUttered) => {
