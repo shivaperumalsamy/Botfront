@@ -72,14 +72,15 @@ class Widget extends Component {
     componentDidMount() {
         const { socket } = this.props;
         if (socket && socket.customData.sessionPersistence)
-            window.onbeforeunload = async (event) => {
-                await socket.emit('save_chat_details', {
+            window.onbeforeunload = () => {
+                socket.emit('save_chat_details', {
                     accessToken: sessionStorage.getItem(ACCESS_TOKEN_NAME),
                     chatSession: sessionStorage.getItem(SESSION_NAME),
                     appSessionId: socket.customData.appSessionId,
                 });
                 sessionStorage.removeItem(ACCESS_TOKEN_NAME);
                 sessionStorage.removeItem(SESSION_NAME);
+                return null;
             };
 
         const { connectOn, autoClearCache, storage, dispatch, defaultHighlightAnimation } =
