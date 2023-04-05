@@ -1,0 +1,9 @@
+include:
+  - project: 'development/all_dev/devopspipelinetemplates' 
+    ref: 'develop'
+    file: Docker/common/conditional-nexus-script.yml
+ 
+
+
+
+
