@@ -1,5 +1,5 @@
 include:
   - project: 'development/all_dev/devopspipelinetemplates' 
     ref: 'develop'
-    file: 'Docker/courtney-docker-image-build.yml'
+    file: 'Docker/bofront-docker-image-build.yml'
 
