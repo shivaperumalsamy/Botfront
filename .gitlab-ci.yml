@@ -1,5 +1,5 @@
 include:
   - project: 'development/all_dev/devopspipelinetemplates' 
-    ref: 'develop'
+    ref: 'feature/UTCOURT-7345-updated-pipeline-template'
     file: 'Docker/bofront-docker-image-build.yml'
 
