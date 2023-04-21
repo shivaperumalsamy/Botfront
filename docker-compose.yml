@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  botfront:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${NEXUS_BASE_URL}/${APPLICATION_NAME}:${ENVIRONMENT}-${TAG_NAME}
+    container_name: botfront
+    ports:
+      - 9080:9080
+    command:
+      - npm
+      - run 
+      - prod
