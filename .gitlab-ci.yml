@@ -1,7 +1,7 @@
 include:
   - project: 'development/all_dev/devopspipelinetemplates' 
-    ref: 'develop'
-    file: 'Docker/feature-UTCOURT-7658-testing-for-all-chatbot'
+    ref: 'feature-UTCOURT-7658-testing-for-all-chatbot'
+    file: 'Docker/common-docker-image-build.yml'
 
 
 
