@@ -1,11 +1,8 @@
-FROM node:12.16.1-alpine
-
+FROM node:12.16.1 as botfront
 WORKDIR /app
-
-COPY package.json .
-
-COPY lib/index.js /app/lib/index.js
-
+COPY . /app
+RUN npm install
+RUN npm run build
+EXPOSE 8080
 RUN npm install http-server
-
-CMD ["npm", "run", "prod"]
+CMD [ "npm", "run", "prod" ]
