@@ -210,10 +210,10 @@ ConnectedWidget.propTypes = {
 };
 
 ConnectedWidget.defaultProps = {
-    title: 'COURTney',
+    title: 'Rasa-GAI',
     subtitle: '',
     customData: {},
-    inputTextFieldHint: 'Message COURTney',
+    inputTextFieldHint: 'Message Rasa-GAI',
     connectingText: 'Waiting for server...',
     fullScreenMode: false,
     hideWhenNotConnected: true,

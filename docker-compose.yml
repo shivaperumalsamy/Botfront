@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ${NEXUS_BASE_URL}/${APPLICATION_NAME}:${ENVIRONMENT}-${TAG_NAME}
+    image: botfront:latest
     container_name: botfront
     ports:
       - 9080:9080
