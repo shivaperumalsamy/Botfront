@@ -6,7 +6,7 @@ import fullscreen from 'assets/fullscreen_button.svg';
 import fullscreenExit from 'assets/fullscreen_exit_button.svg';
 import unmuteTone from 'assets/unmute-tone.png';
 import muteTone from 'assets/mute-tone.png';
-import logo from 'assets/state_of_utah.png';
+import logo from 'assets/logo.png';
 import './style.scss';
 import ThemeContext from '../../../../ThemeContext';
 
